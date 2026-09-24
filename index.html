@@ -51,16 +51,26 @@
 
     <div class="container">
 
-      <div class="switch-container">
-        <span>Hitung Komisi: <strong id="commission-status-label" style="color:var(--success);">AKTIF</strong></span>
-        <label class="switch">
-          <input type="checkbox" id="commissionToggle" checked onchange="toggleCommissionMode()">
-          <span class="slider"></span>
-        </label>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+        <div class="switch-container" style="margin-bottom:0;">
+          <span>🌙 <strong id="dark-mode-label">Gelap</strong></span>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="switch-container" style="margin-bottom:0;">
+          <span>Hitung Komisi: <strong id="commission-status-label" style="color:var(--success);">AKTIF</strong></span>
+          <label class="switch">
+            <input type="checkbox" id="commissionToggle" checked onchange="toggleCommissionMode()">
+            <span class="slider"></span>
+          </label>
+        </div>
       </div>
       
       <!-- TAB INPUT -->
       <div id="tab-input" class="tab-content active">
+        <div class="input-grid-2">
         <div class="card">
           <h3>1. Pilih Karyawan</h3>
           <div class="form-group"><select id="input-karyawan-select" style="font-weight:bold; color:var(--primary);"></select></div>
@@ -68,8 +78,9 @@
         <div class="card">
           <h3>2. Paste Chat WA</h3>
           <p style="font-size:0.75em; color:#64748b; margin-bottom:6px;">Contoh: <i>budi 3 selimut 3 bc 3</i> atau <i>[19/09/2020] rahma budi 7, selimut 3</i></p>
-          <textarea id="inputText" placeholder="ria 4&#10;selimut 3&#10;bc 2"></textarea>
+          <textarea id="inputText" placeholder="ria 4&#10;selimut 3&#10;bc 2" style="height:140px; min-height:140px; font-size:0.9em; line-height:1.6; padding:10px;"></textarea>
           <button class="btn btn-primary" style="width:100%; font-size:0.9em;" onclick="processInputWA()">Simpan Pengerjaan</button>
+        </div>
         </div>
       </div>
 
@@ -113,7 +124,7 @@
         </div>
 
         <div class="card">
-          <h3>Pengerjaan Hari Ini <button class="btn btn-danger" style="font-size:0.6em; padding:4px 8px; float:right;" onclick="resetTodayOrders()">Reset</button></h3>
+          <h3>Pengerjaan Hari Ini <button class="icon-action delete" style="float:right; width:30px; height:30px; background:#fee2e2; color:#b91c1c;" onclick="resetTodayOrders()" title="Reset hari ini">🔄</button></h3>
           <div class="table-responsive"><table><thead><tr><th>Jam</th><th>Nama</th><th>Jenis</th><th>Qty</th><th>Satuan</th><th>Komisi</th><th>Aksi</th></tr></thead><tbody id="ordersTable"></tbody></table></div>
         </div>
       </div>
