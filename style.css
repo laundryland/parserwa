@@ -306,3 +306,34 @@ input:checked + .slider:before { transform: translateX(16px); }
 /* PCS add icon */
 .btn-add-pcs { background:#10b981; color:#fff; border:0; border-radius:8px; padding:6px 10px; font-weight:700; cursor:pointer; font-size:0.75em; }
 .btn-add-pcs:hover { filter:brightness(1.1); }
+
+/* === DARK MODE === */
+body.dark-mode { background:#0f172a; color:#e2e8f0; }
+body.dark-mode .app-wrapper { background:#1e293b; color:#e2e8f0; }
+body.dark-mode .card { background:#334155; border-color:#475569; color:#e2e8f0; }
+body.dark-mode .settings-card-tap { background:#334155; border-color:#475569; }
+body.dark-mode .settings-modal-content { background:#1e293b; color:#e2e8f0; }
+body.dark-mode .modal-content { background:#1e293b; color:#e2e8f0; }
+body.dark-mode input, body.dark-mode select, body.dark-mode textarea { background:#1e293b; color:#e2e8f0; border-color:#475569; }
+body.dark-mode .table-responsive table { color:#e2e8f0; }
+body.dark-mode th { background:#475569; color:#e2e8f0; }
+body.dark-mode td { border-color:#475569; }
+body.dark-mode .switch-container { background:#334155; }
+body.dark-mode nav { background:#334155; }
+body.dark-mode nav button { color:#94a3b8; }
+body.dark-mode nav button.active { background:#1e293b; color:#60a5fa; }
+body.dark-mode #tab-input, body.dark-mode #tab-rekap, body.dark-mode #tab-settings { background: rgba(30,41,59,0.9); }
+
+/* Input WA lapang */
+#inputText { height:140px !important; min-height:140px; }
+#tab-input .card { margin-bottom:10px; }
+@media (min-width: 480px) {
+  #tab-input { display:block; }
+}
+
+/* Input WA /2 kolom lapang */
+.input-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.input-grid-2 .card { margin-bottom:0; }
+@media (max-width: 440px) {
+  .input-grid-2 { grid-template-columns:1fr; }
+}

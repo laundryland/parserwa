@@ -78,6 +78,7 @@ let isCommissionActive = true;
 window.addEventListener('DOMContentLoaded', () => {
   initClock();
   loadSavedLogo();
+  loadDarkMode();
 });
 
 function initClock() {
@@ -133,6 +134,52 @@ function handleLogoUpload(event) {
     uiToast('Logo berhasil dipasang untuk Header, Favicon, Nota PNG, dan Splash Screen!');
   };
   reader.readAsDataURL(file);
+}
+
+
+function toggleDarkMode() {
+  const toggle = document.getElementById('darkModeToggle');
+  const label = document.getElementById('dark-mode-label');
+  const isDark = toggle ? toggle.checked : false;
+  document.body.classList.toggle('dark-mode', isDark);
+  if (label) {
+    label.innerText = isDark ? 'Terang' : 'Gelap';
+    label.previousSibling ? null : null;
+  }
+  localStorage.setItem('app_dark_mode', isDark ? '1' : '0');
+  // update switch container icon
+  const span = toggle ? toggle.closest('.switch-container').querySelector('span') : null;
+  if (span) span.innerHTML = (isDark ? '☀️' : '🌙') + ' <strong id="dark-mode-label">' + (isDark ? 'Terang' : 'Gelap') + '</strong>';
+}
+
+function loadDarkMode() {
+  const saved = localStorage.getItem('app_dark_mode');
+  const isDark = saved === '1';
+  const toggle = document.getElementById('darkModeToggle');
+  if (toggle) toggle.checked = isDark;
+  document.body.classList.toggle('dark-mode', isDark);
+  const label = document.getElementById('dark-mode-label');
+  if (label) label.innerText = isDark ? 'Terang' : 'Gelap';
+  const span = toggle ? toggle.closest('.switch-container').querySelector('span') : null;
+  if (span) span.innerHTML = (isDark ? '☀️' : '🌙') + ' <strong id="dark-mode-label">' + (isDark ? 'Terang' : 'Gelap') + '</strong>';
+}
+
+async function resetTodayOrders() {
+  const todayStr = new Date().toLocaleDateString('id-ID');
+  if (!(await uiConfirm(`Reset semua pengerjaan hari ini (${todayStr})? Data akan dihapus permanen.`, 'Reset Hari Ini'))) return;
+  const tx = db.transaction('orders','readwrite');
+  const store = tx.objectStore('orders');
+  store.getAll().onsuccess = e => {
+    const all = e.target.result || [];
+    all.forEach(o => {
+      if (o.tanggal === todayStr) store.delete(o.id);
+    });
+  };
+  tx.oncomplete = () => {
+    renderOrdersTable();
+    generateEmployeeDailyReport();
+    uiToast('Pengerjaan hari ini direset.');
+  };
 }
 
 function loadSavedLogo() {
