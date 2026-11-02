@@ -1042,22 +1042,64 @@ Alamat & No HP sudah HAPUS TOTAL dari sini, pindah ke KartuDataOutlet per outlet
 <div id="modalPilihOutletAktif" class="modal"><div class="modal-box" style="max-width:360px"><div class="title" style="display:flex;justify-content:space-between;align-items:center"><span>🏪 Pilih Outlet Aktif</span><span style="font-size:10px;background:#0fb9a0;color:white;padding:2px 8px;border-radius:12px">Owner only</span></div><div class="small" style="margin:6px 0;background:#f0fdfa;padding:6px;border-radius:6px;border:1px solid #ccfbf1">Tap outlet untuk jadikan aktif. Outlet aktif menentukan data nota, pelanggan, dan kas. Tap kolom header untuk buka pilihan ini.</div><div id="listOutletAktifPicker" style="max-height:300px;overflow:auto;margin-top:8px"></div><div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-abu" style="flex:1" onclick="closeModal('modalPilihOutletAktif')">✖️ Tutup</button><button class="btn btn-hijau" style="flex:1;background:#0e7490" onclick="closeModal('modalPilihOutletAktif'); navigate('dataoutlet')">🏪 Kelola Outlet</button></div></div></div>
 
 <!-- Modal khusus Bluetooth Print Thermal: ikon saja + tombol Print Thermal -->
+
+<!-- Modal Bluetooth Print Thermal FIXED v22.2 - 2 tombol jelas + cancel tutup -->
+
+<!-- Modal Bluetooth Print Thermal FIXED v22.2 - 2 tombol jelas + cancel tutup -->
+
+<!-- Modal Bluetooth Print Thermal FIXED v22.2 - 2 tombol jelas + cancel tutup -->
+
+<!-- Modal Bluetooth Print Thermal FIXED v22.2 - 2 tombol jelas + cancel tutup -->
+
+<!-- Modal Bluetooth Print Thermal FIXED v22.2 - 2 tombol jelas + cancel tutup -->
+
+<!-- Modal Bluetooth Print Thermal FIXED v22.2 - 2 tombol jelas + cancel tutup -->
 <div id="modalBluetoothPrint" class="modal">
-  <div class="modal-box" style="position:relative;width:380px;max-width:95vw;height:auto;max-height:none;padding:18px;border-radius:18px;overflow:hidden;border:1px solid #111;display:flex;align-items:center;gap:16px;background:white;text-align:center">
-    <button type="button" aria-label="Tutup" onclick="closeModal('modalBluetoothPrint')" style="position:absolute;right:10px;top:8px;border:0;background:transparent;color:#555;font-size:22px;line-height:1;cursor:pointer">×</button>
-    <div aria-label="Bluetooth printer thermal" style="width:104px;height:104px;display:flex;align-items:center;justify-content:center;color:#0e7490">
-      <svg width="100" height="100" viewBox="0 0 100 100" role="img" aria-label="Ikon Bluetooth Print" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="48" fill="#e0f2fe"/>
-        <path d="M47 18 L68 36 L51 50 L68 64 L47 82 L47 18 M47 50 L31 35 M47 50 L31 65" fill="none" stroke="#0e7490" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M22 56 H14 V79 H28 M72 56 H86 V79 H72" fill="none" stroke="#0e7490" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="27" y="53" width="46" height="30" rx="4" fill="#0fb9a0" stroke="#0e7490" stroke-width="3"/>
-        <rect x="34" y="67" width="32" height="23" rx="2" fill="white" stroke="#0e7490" stroke-width="3"/>
-        <path d="M37 73 H61 M37 79 H57" stroke="#0e7490" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
+  <div class="modal-box" style="position:relative;width:380px;max-width:95vw;height:auto;max-height:90vh;padding:18px;border-radius:18px;overflow:auto;border:1px solid #e5e7eb;display:flex;flex-direction:column;gap:12px;background:white;text-align:center">
+    <button type="button" aria-label="Tutup" onclick="closeModal('modalBluetoothPrint')" style="position:absolute;right:10px;top:8px;border:0;background:transparent;color:#555;font-size:22px;line-height:1;cursor:pointer;z-index:2">×</button>
+    
+    <div style="display:flex;align-items:center;gap:12px;text-align:left">
+      <div aria-label="Bluetooth printer thermal" style="width:56px;height:56px;display:flex;align-items:center;justify-content:center;color:#0e7490;background:#e0f2fe;border-radius:12px;flex-shrink:0">
+        <span style="font-size:28px">🖨️</span>
+      </div>
+      <div style="flex:1">
+        <b style="font-size:13px;display:block">Cetak Nota</b>
+        <span style="font-size:10px;color:#666">Pilih metode cetak</span>
+        <div id="bluetoothStatus" style="margin-top:4px;font-size:10px;padding:4px 8px;border-radius:6px;background:#f3f4f6;display:none"></div>
+      </div>
     </div>
-    <button type="button" class="btn btn-hijau btn-full" style="height:46px;font-size:14px;font-weight:800;border-radius:10px" onclick="cetakNotaBluetooth()">🖨️ Print Thermal</button>
+
+    <div id="previewNotaBluetooth" style="max-height:200px;overflow:auto;border:1px dashed #e5e7eb;border-radius:8px;padding:8px;background:#f8fafc;text-align:left;font-size:11px"></div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+      <button type="button" id="btnCetakThermal58" class="btn btn-hijau btn-full" style="height:48px;font-size:14px;font-weight:800;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;background:#0fb9a0;color:white;border:none" onclick="cetakNotaThermalNative()">
+        <span>🖨️</span> Cetak Thermal 58mm
+      </button>
+      
+      <button type="button" id="btnKirimWABisnis" class="btn btn-full" style="height:48px;font-size:14px;font-weight:800;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;border:none" onclick="kirimNotaWABisnisNative()">
+        <span>📲</span> Kirim WA Bisnis
+      </button>
+      
+      <button type="button" class="btn btn-abu btn-full" style="height:42px;font-size:13px;font-weight:600;border-radius:12px;background:#f3f4f6;color:#111;border:1px solid #e5e7eb" onclick="closeModal('modalBluetoothPrint')">
+        ✖️ Batal / Tutup
+      </button>
+    </div>
+    
+    <div class="small" style="font-size:9px;color:#999;text-align:center">Support: RPP02N, EP-5802, ESC/POS 58mm • WA Bisnis otomatis</div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- MODALS -->
 <div id="modalPin" class="modal"><div class="modal-box"><div class="title">🔐 Login Karyawan</div><div class="small" style="background:#f0fdfa;padding:10px;border-radius:8px;text-align:center;border:1px solid #ccfbf1">Masukkan PIN karyawan<br><span style="font-size:10px;color:#0fb9a0;font-weight:700">Nama akan tampil setelah login - PIN tidak pernah ditampilkan</span></div><input id="inputPin" type="password" class="form-input" placeholder="••••••" maxlength="6" inputmode="numeric" style="margin-top:12px;font-size:15px;text-align:center;letter-spacing:6px;font-weight:800" autofocus><div style="display:flex;gap:6px;margin-top:12px"><button type="button" class="btn btn-hijau btn-full" style="flex:1;height:44px;font-size:14px;font-weight:800" onclick="loginPIN()">🔓 Login</button></div><div class="small" style="margin-top:8px;text-align:center;color:#999;font-size:9px">Aman - password tidak ditampilkan</div></div></div>
 <div id="modalConfirmDelete" class="modal"><div class="modal-box"><div class="title">🗑️ Konfirmasi Hapus</div><div id="deleteMessage" class="small"></div><div style="display:flex;gap:6px"><button class="btn btn-abu" style="flex:1" onclick="closeModal('modalConfirmDelete')">❌ Batal</button><button id="btnConfirmDelete" class="btn btn-pink" style="flex:1">🗑️ Hapus</button></div></div></div>
@@ -1598,7 +1640,7 @@ let DB=null; let currentUser=null; let currentOutletId=null; let currentNotaDeta
 function defaultDB(){ 
   const now=Date.now(); 
   return { 
-    outlets:[{id:'outlet_1',nama:'Laundry Land',alamat:'Jl. Madiun No.1',nohp:'089612298800',aktif:true,last_modified:now},{id:'outlet_2',nama:'ResiQ Laundry',alamat:'Jl. Madiun No.2',nohp:'0895325292255',aktif:false,last_modified:now}], 
+    outlets:[{id:'outlet_1',nama:'Laundry Land',alamat:'Jl. Setia Budi 62 Madiun',nohp:'089612298800',aktif:true,last_modified:now},{id:'outlet_2',nama:'ResiQ Laundry',alamat:'Jl. Serayu Timur 134 Madiun',nohp:'0895325292255',aktif:false,last_modified:now}], 
     karyawans:[
       {id:'karyawan_1',nama:'Owner',pin:'123456',level:'Owner',outlet_id:'outlet_1',lintas:true,last_modified:now}
     ], 
@@ -1615,7 +1657,7 @@ function defaultDB(){
       diskonDeposito:5,
       diskonTransaksi:0,
       nota:{
-        alamat:'Jl. Madiun No.1',
+        alamat:'Jl. Setia Budi 62 Madiun',
         nohp:'089612298800',
         fontNama:14,
         fontNominal:15,
@@ -1627,8 +1669,8 @@ function defaultDB(){
         tampilAlamat:true,
         tampilNoHP:true,
         outletSettings:{
-          'outlet_1':{nama:'Laundry Land',alamat:'Jl. Madiun No.1',nohp:'089612298800',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()},
-          'outlet_2':{nama:'ResiQ Laundry',alamat:'Jl. Madiun No.2',nohp:'0895325292255',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()}
+          'outlet_1':{nama:'Laundry Land',alamat:'Jl. Setia Budi 62 Madiun',nohp:'089612298800',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()},
+          'outlet_2':{nama:'ResiQ Laundry',alamat:'Jl. Serayu Timur 134 Madiun',nohp:'0895325292255',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()}
         }
       },
       hakAkses:{
@@ -1684,15 +1726,15 @@ function loadDB(){try{
     DB.setting.nota.logoPNG='https://raw.githubusercontent.com/laundryland/laundry/main/icon-512.png';
     if(!DB.setting.nota.outletSettings) DB.setting.nota.outletSettings={};
     if(!DB.setting.nota.outletSettings['outlet_1']){
-      DB.setting.nota.outletSettings['outlet_1']={nama:'Laundry Land',alamat:'Jl. Madiun No.1',nohp:'089612298800',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()};
+      DB.setting.nota.outletSettings['outlet_1']={nama:'Laundry Land',alamat:'Jl. Setia Budi 62 Madiun',nohp:'089612298800',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()};
     }
     if(!DB.setting.nota.outletSettings['outlet_2']){
-      DB.setting.nota.outletSettings['outlet_2']={nama:'ResiQ Laundry',alamat:'Jl. Madiun No.2',nohp:'0895325292255',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()};
+      DB.setting.nota.outletSettings['outlet_2']={nama:'ResiQ Laundry',alamat:'Jl. Serayu Timur 134 Madiun',nohp:'0895325292255',tampilNama:true,tampilAlamat:true,tampilNoHP:true,last_modified:Date.now()};
     }
     if(DB.outlets && DB.outlets.length===1 && DB.outlets[0].nama==='Laundry Land'){
       const existsResiQ = DB.outlets.some(o=>o.nama.toLowerCase().includes('resiq'));
       if(!existsResiQ){
-        DB.outlets.push({id:'outlet_2',nama:'ResiQ Laundry',alamat:'Jl. Madiun No.2',nohp:'0895325292255',aktif:false,last_modified:Date.now()});
+        DB.outlets.push({id:'outlet_2',nama:'ResiQ Laundry',alamat:'Jl. Serayu Timur 134 Madiun',nohp:'0895325292255',aktif:false,last_modified:Date.now()});
       }
     }
     try{
@@ -1742,7 +1784,7 @@ function loadDB(){try{
 
 function clearOldNotaCache(){
   try{
-    logoImageCache={};
+    if(typeof logoImageCache!=='undefined'){ Object.keys(logoImageCache).forEach(k=>delete logoImageCache[k]); } // FIX anti crash login
     localStorage.removeItem('laundryland_preview_cache');
     localStorage.removeItem('laundryland_nota_cache');
     // Reset font to kecil
@@ -4020,54 +4062,33 @@ function editDepositoPrompt(id){try{ const p=DB.pelanggans.find(x=>x.id===id); i
 function renderLayanan(){try{
   const cont=document.getElementById('listLayanan'); if(!cont) return;
   const q=(document.getElementById('searchLayanan')?.value||'').toLowerCase();
-  let list=DB.layanans;
-  
-  // FIX: Jangan auto-assign outlet_id ke DB.outlets[0] untuk layanan lama - biarkan global
-  // Layanan tanpa outlet_id = global/shared, tampil di semua outlet
-  // Layanan dengan outlet_id = spesifik outlet, hanya tampil di outlet itu
-  // Ini fix bug: ketika ResiQ aktif, data hilang dan LaundryLand muncul
-  
-  let filteredByOutlet = false;
-  let globalCount = 0;
-  let outletSpecificCount = 0;
-  
-  if(currentOutletId && DB.outlets.length>1){
-    const activeId = currentOutletId;
-    // Hitung global vs spesifik
-    globalCount = list.filter(l=>!l.outlet_id).length;
-    outletSpecificCount = list.filter(l=>l.outlet_id===activeId).length;
-    
-    // Filter: tampilkan global + yang outlet_id sesuai aktif
-    // Jika user mau lihat hanya outlet spesifik, bisa toggle nanti, tapi default tampilkan global + spesifik
-    const filtered = list.filter(l=>{
-      if(!l.outlet_id) return true; // global - tampil di semua outlet
-      return l.outlet_id === activeId;
-    });
-    
-    // Hanya filter jika ada yang spesifik atau ada global
-    // Jika filtered === list, berarti semua global, tidak perlu flag filtered
-    if(filtered.length !== list.length || list.some(l=>l.outlet_id)){
-      list = filtered;
-      filteredByOutlet = true;
+  let list=DB.layanans||[];
+  let needSave=false;
+  list.forEach(l=>{
+    if(!l.outlet_id){
+      l.outlet_id=currentOutletId||DB.outlets.find(o=>o.aktif)?.id||DB.outlets[0]?.id||'outlet_1';
+      needSave=true;
     }
+  });
+  if(needSave) saveDB();
+  const outletId = currentOutletId;
+  if(outletId && DB.outlets.length>0){
+    list = list.filter(l=> (l.outlet_id||'')===outletId);
   }
-  
   if(q) list=list.filter(l=>l.kode.toLowerCase().includes(q)||l.nama.toLowerCase().includes(q));
-  
   let headerHtml = `
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;padding:8px;background:#fef3c7;border-radius:8px;border:1px solid #f59e0b">
       <button class="btn btn-abu" style="padding:6px 10px;font-size:11px" onclick="selectAllLayananMigrasi()">☑️ Pilih Semua / Batal</button>
       <button class="btn btn-hijau" style="padding:6px 10px;font-size:11px;background:#f59e0b" onclick="openMigrasiLayananModal()">📦 Migrasi Layanan <span id="migrasiLayananCounter" style="background:#0e7490;color:white;padding:2px 6px;border-radius:10px;margin-left:4px"></span></button>
       <button class="btn btn-abu" style="padding:6px 10px;font-size:11px;background:#ef4444;color:white" onclick="hapusAllLayanan()">🗑️ Hapus All</button>
-      <span style="font-size:10px;color:#666;align-self:center">Outlet: ${DB.outlets.find(o=>o.id===currentOutletId)?.nama||''} | ${list.length} layanan ${filteredByOutlet?`(${globalCount} global + ${outletSpecificCount} khusus ${DB.outlets.find(o=>o.id===currentOutletId)?.nama||''})`:''}</span>
+      <span style="font-size:10px;color:#666;align-self:center">Outlet: ${DB.outlets.find(o=>o.id===currentOutletId)?.nama||''} | ${list.length} layanan independen</span>
     </div>
   `;
-  
   if(list.length===0){ 
     cont.innerHTML=headerHtml+`<div class="small" style="text-align:center;padding:12px">
       Tidak ada layanan di outlet <b>${DB.outlets.find(o=>o.id===currentOutletId)?.nama||''}</b><br>
-      <span style="font-size:10px">Global: ${globalCount}, Khusus outlet ini: ${outletSpecificCount}</span><br>
-      <button class="btn btn-hijau" style="margin-top:6px;padding:6px 10px;font-size:11px" onclick="openMigrasiLayananModal()">📦 Migrasi dari outlet lain</button>
+      <span style="font-size:10px">Independen per outlet - tidak campur</span><br>
+      <button class="btn btn-hijau" style="margin-top:6px;padding:6px 10px;font-size:11px" onclick="openModal('modalImportLayanan')">📥 Import Massal CSV</button>
       <button class="btn btn-abu" style="margin-top:6px;padding:6px 10px;font-size:11px" onclick="openModal('modalTambahLayanan')">➕ Tambah Layanan Baru</button>
     </div>`; 
     updateMigrasiLayananCounter();
@@ -4075,15 +4096,14 @@ function renderLayanan(){try{
   }
   cont.innerHTML=headerHtml+list.map(l=>{
     const isSelected = selectedLayananMigrasi.has(l.id);
-    const isGlobal = !l.outlet_id;
     return `
-    <div class="nota-card" style="border-left:4px solid ${isSelected?'#f59e0b':(isGlobal?'#10b981':'#f97316')};border-radius:12px;background:${isSelected?'#fffbeb':'white'}">
+    <div class="nota-card" style="border-left:4px solid ${isSelected?'#f59e0b':'#f97316'};border-radius:12px;background:${isSelected?'#fffbeb':'white'}">
       <div class="flex-between">
         <div style="display:flex;align-items:center;gap:8px;flex:1">
           <input type="checkbox" ${isSelected?'checked':''} onchange="toggleSelectLayananMigrasi('${l.id}')" style="width:18px;height:18px">
           <div style="flex:1">
-            <b>${l.kode} - ${l.nama} ${isGlobal?'<span style="font-size:9px;background:#10b981;color:white;padding:1px 5px;border-radius:10px">GLOBAL</span>':''}</b>
-            <div class="small">Min ${l.min_qty||1} ${l.satuan} • Estimasi: ${l.estimasi_nilai||1} ${l.estimasi_jenis||'Hari'} • ${isGlobal?'Global (semua outlet)':(DB.outlets.find(o=>o.id===l.outlet_id)?.nama||'Outlet')}</div>
+            <b>${l.kode} - ${l.nama}</b>
+            <div class="small">Min ${l.min_qty||1} ${l.satuan} • Estimasi: ${l.estimasi_nilai||1} ${l.estimasi_jenis||'Hari'} • ${DB.outlets.find(o=>o.id===l.outlet_id)?.nama||'Outlet'}</div>
           </div>
         </div>
         <span>${formatRp(l.harga)}/${l.satuan}</span>
@@ -5724,10 +5744,10 @@ async function renderNotaCanvasAsync(canvas,nota,pel,setting,outletNama){
 function renderNotaCanvas(canvas,nota,pel,setting,outletNama){
   try{
     if(!canvas||!nota) return false;
-    const SCALE=3,LW=228,pad=14,inner=LW-2*pad,cardX=8,cardW=212,topPad=10,bottomPad=10;
+    const isWA = canvas && canvas.id==='canvasPNG'; const SCALE=3,LW=isWA?360:228,pad=14,inner=LW-2*pad,cardX=isWA?12:8,cardW=isWA?LW-24:212,topPad=10,bottomPad=10; // FIX v28.7: 360->1080 WA
     const items=nota.items||[];
     const minRows=items.map(it=>({it,qty:parseFloat(it.qty)||0,min:parseFloat(it.min_qty)||1}));
-    const hasLogo=!!(setting.logoPNG||setting.logoThermal), logoSize=hasLogo?(parseInt(setting.logoSize)||40):0;
+    const hasLogo=!!(setting.logoPNG||setting.logoThermal), logoSize=hasLogo?56:0; // FIX v28.7: logo 56 V-center
     const outletData=typeof DB!=='undefined'&&DB.outlets?DB.outlets.find(o=>o.id===nota.outlet_id)||DB.outlets.find(o=>o.id===currentOutletId)||DB.outlets.find(o=>o.aktif)||DB.outlets[0]:null;
     let alamat=outletData&&outletData.alamat?outletData.alamat:setting.alamat||'',hp=setting.nohp||'',showA=setting.tampilAlamat!==false,showH=setting.tampilNoHP!==false,showN=setting.tampilNama!==false;
     const os=nota.outlet_id&&setting.outletSettings&&setting.outletSettings[nota.outlet_id];
@@ -5739,17 +5759,22 @@ function renderNotaCanvas(canvas,nota,pel,setting,outletNama){
     const tmpMeasureCanvas=document.createElement('canvas');
     const tmpCtx=tmpMeasureCanvas.getContext('2d');
     tmpCtx.font='8px Inter, Arial';
-    const glassWTemp=inner-30; // 15px kiri+kanan =30
-    const alamatLinesAcc=showA&&alamat?wrap(tmpCtx,alamat,glassWTemp-16,'8px Inter, Arial'):[];
-    const gapV=8; // request: space vertikal 8px antar baris
-    let contentH=15; // top padding 15px di dalam glass
-    if(hasLogo) contentH+=logoSize+gapV;
-    if(showN) contentH+=22+gapV;
-    if(showA&&alamat) contentH+=Math.max(11,alamatLinesAcc.length*10)+gapV;
-    if(showH&&hp) contentH+=11+gapV;
-    contentH+=15; // bottom padding 15px di dalam glass
-    let headerH=contentH+30; // glass inset 15px dari header (15 top +15 bottom) =30
-    headerH=Math.max(headerH, hasLogo?90:68); // min dengan padding 15px
+    
+    
+    const glassWTemp=inner-20;
+    const col2WTemp = glassWTemp*0.65;
+    const alamatLinesAcc=showA&&alamat?wrap(tmpCtx,'📍 '+alamat,col2WTemp-16,'9px Inter, Arial'):[]; 
+    const gapV=7; 
+    let contentH=10; 
+    // 2 kolom: tinggi ditentukan oleh max(logo, block teks)
+    const blockHCalc = 24 + (alamatLinesAcc.length>0? (gapV+alamatLinesAcc.length*10):0) + (showH&&hp? gapV+11:0);
+    const logoHCalc = 56;
+    contentH+=Math.max(logoHCalc, blockHCalc);
+    contentH+=20; // bottom padding 10 + top 10
+    let headerH=contentH+20; 
+    headerH=Math.max(headerH, 92);
+
+ // min dengan padding 15px
     let H=topPad+headerH+10+16+32+24+bottomPad;
     if(showA&&alamat) {} // already in header
     const jamBuka = cols.jamBuka||'08:00-21:00', istirahat = cols.jamIstirahat||'16:00-17:00', showJam = cols.tampilJamBuka!==false;
@@ -5758,143 +5783,198 @@ function renderNotaCanvas(canvas,nota,pel,setting,outletNama){
     H+=110+(parseInt(setting.fontNominal)||18)+(parseInt(setting.fontLunas)||11)+70;
     canvas.width=LW*SCALE; canvas.height=H*SCALE; canvas.style.width=LW+'px'; canvas.style.height=H+'px';
     const ctx=canvas.getContext('2d'); ctx.setTransform(1,0,0,1,0,0); ctx.scale(SCALE,SCALE);
-    const pageBg=ctx.createLinearGradient(0,0,LW,H); pageBg.addColorStop(0,'#ff70ce'); pageBg.addColorStop(.48,'#f618a9'); pageBg.addColorStop(1,'#c90083');
+    const pageBg=ctx.createLinearGradient(0,0,LW,H); pageBg.addColorStop(0,'#f618a9'); pageBg.addColorStop(.48,'#f618a9'); pageBg.addColorStop(1,'#c90083'); // base #f618a9 padding 5px
     ctx.fillStyle=pageBg; ctx.fillRect(0,0,LW,H);
     // Kilau lembut di latar belakang agar nota terasa seperti kartu 3D
     ctx.save(); ctx.globalAlpha=.22; const sheen=ctx.createRadialGradient(LW*.18,18,2,LW*.18,18,130); sheen.addColorStop(0,'#ffffff'); sheen.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=sheen; ctx.fillRect(0,0,LW,H); ctx.restore();
     ctx.save(); ctx.shadowColor='rgba(76,0,48,.30)'; ctx.shadowBlur=14; ctx.shadowOffsetY=5; ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.roundRect(cardX,6,cardW,H-12,16); ctx.fill(); ctx.restore();
     ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1.2; ctx.beginPath(); ctx.roundRect(cardX,6,cardW,H-12,16); ctx.stroke();
+    
+    
     let y=topPad;
     const grad=ctx.createLinearGradient(pad,y,pad,y+headerH); grad.addColorStop(0,'#f618a9'); grad.addColorStop(.55,'#ec168f'); grad.addColorStop(1,'#b90076');
     ctx.save(); ctx.shadowColor='rgba(111,0,67,.22)'; ctx.shadowBlur=7; ctx.shadowOffsetY=3; ctx.fillStyle=grad; ctx.beginPath(); ctx.roundRect(pad,y,inner,headerH,13); ctx.fill(); ctx.restore();
-    // Lapisan kaca: highlight transparan dan garis refleksi tipis
-    ctx.save(); const glass=ctx.createLinearGradient(pad,y,pad,y+headerH); glass.addColorStop(0,'rgba(255,255,255,.36)'); glass.addColorStop(.28,'rgba(255,255,255,.12)'); glass.addColorStop(1,'rgba(255,255,255,.035)'); ctx.fillStyle=glass; ctx.beginPath(); ctx.roundRect(pad+1,y+1,inner-2,headerH-2,12); ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.55)'; ctx.lineWidth=.8; ctx.stroke(); ctx.restore();
-    // Panel kaca 3D dibuat inset 15px dari bidang dasar header magenta - FIX v24 padding 4 sisi 15px
-    // Seluruh identitas outlet (logo, nama, alamat, nomor HP) berada di dalam panel ini.
-    const glassX=pad+15, glassY=y+15, glassW=inner-30, glassH=headerH-30;
-    ctx.save();
-    ctx.shadowColor='rgba(75,0,52,.34)'; ctx.shadowBlur=10; ctx.shadowOffsetY=4;
+    ctx.save(); const glassHl=ctx.createLinearGradient(pad,y,pad,y+headerH); glassHl.addColorStop(0,'rgba(255,255,255,.36)'); glassHl.addColorStop(.28,'rgba(255,255,255,.12)'); glassHl.addColorStop(1,'rgba(255,255,255,.035)'); ctx.fillStyle=glassHl; ctx.beginPath(); ctx.roundRect(pad+1,y+1,inner-2,headerH-2,12); ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.55)'; ctx.lineWidth=.8; ctx.stroke(); ctx.restore();
+    const glassX=pad+10, glassY=y+10, glassW=inner-20, glassH=headerH-20;
+    ctx.save(); ctx.shadowColor='rgba(75,0,52,.45)'; ctx.shadowBlur=14; ctx.shadowOffsetY=6;
     const glassBase=ctx.createLinearGradient(glassX,glassY,glassX,glassY+glassH);
-    glassBase.addColorStop(0,'rgba(255,255,255,.48)');
-    glassBase.addColorStop(.18,'rgba(255,255,255,.24)');
-    glassBase.addColorStop(.58,'rgba(255,255,255,.12)');
-    glassBase.addColorStop(1,'rgba(255,255,255,.20)');
-    ctx.fillStyle=glassBase; ctx.beginPath(); ctx.roundRect(glassX,glassY,glassW,glassH,11); ctx.fill();
-    ctx.restore();
+    glassBase.addColorStop(0,'rgba(255,255,255,.52)'); glassBase.addColorStop(.18,'rgba(255,255,255,.28)'); glassBase.addColorStop(.58,'rgba(255,255,255,.14)'); glassBase.addColorStop(1,'rgba(255,255,255,.24)');
+    ctx.fillStyle=glassBase; ctx.beginPath(); ctx.roundRect(glassX,glassY,glassW,glassH,11); ctx.fill(); ctx.restore();
     ctx.save();
-    ctx.beginPath(); ctx.roundRect(glassX+.8,glassY+.8,glassW-1.6,glassH-1.6,10); ctx.clip();
-    const reflection=ctx.createLinearGradient(glassX,glassY,glassX+glassW*.75,glassY+glassH);
-    reflection.addColorStop(0,'rgba(255,255,255,.42)'); reflection.addColorStop(.34,'rgba(255,255,255,.08)'); reflection.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.fillStyle=reflection; ctx.fillRect(glassX,glassY,glassW,glassH);
-    ctx.globalAlpha=.32; ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.ellipse(glassX+glassW*.28,glassY+2,glassW*.34,5,0,0,Math.PI*2); ctx.fill();
+    const screwR = 4.2;
+    const screwPositions = [
+      [glassX+12, glassY+12],
+      [glassX+glassW-12, glassY+12],
+      [glassX+12, glassY+glassH-12],
+      [glassX+glassW-12, glassY+glassH-12]
+    ];
+    screwPositions.forEach(([sx, sy])=>{
+      ctx.beginPath(); ctx.fillStyle='rgba(0,0,0,0.28)'; ctx.arc(sx+0.9, sy+0.9, screwR+0.5, 0, Math.PI*2); ctx.fill();
+      const gradScrew = ctx.createRadialGradient(sx-1.2, sy-1.2, 0, sx, sy, screwR);
+      gradScrew.addColorStop(0,'#ffffff'); gradScrew.addColorStop(0.35,'#e5e7eb'); gradScrew.addColorStop(1,'#9ca3af');
+      ctx.fillStyle=gradScrew; ctx.beginPath(); ctx.arc(sx, sy, screwR, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle='#111827'; ctx.beginPath(); ctx.arc(sx, sy, screwR*0.38, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.arc(sx-1, sy-1, 0.9, 0, Math.PI*2); ctx.fill();
+    });
     ctx.restore();
-    ctx.save(); ctx.strokeStyle='rgba(255,255,255,.92)'; ctx.lineWidth=1.15;
-    ctx.beginPath(); ctx.roundRect(glassX+.6,glassY+.6,glassW-1.2,glassH-1.2,10); ctx.stroke();
-    ctx.strokeStyle='rgba(255,255,255,.24)'; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(glassX+12,glassY+glassH-3); ctx.lineTo(glassX+glassW-12,glassY+glassH-3); ctx.stroke(); ctx.restore();
-    let hy=glassY+15; // padding 15px atas - FIX v24
+    ctx.save(); ctx.beginPath(); ctx.roundRect(glassX+.8,glassY+.8,glassW-1.6,glassH-1.6,10); ctx.clip();
+    const reflection=ctx.createLinearGradient(glassX,glassY,glassX+glassW*.75,glassY+glassH);
+    reflection.addColorStop(0,'rgba(255,255,255,.44)'); reflection.addColorStop(.34,'rgba(255,255,255,.10)'); reflection.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=reflection; ctx.fillRect(glassX,glassY,glassW,glassH); ctx.globalAlpha=.36; ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.ellipse(glassX+glassW*.28,glassY+2.5,glassW*.34,5.5,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+    ctx.save(); ctx.strokeStyle='rgba(255,255,255,.92)'; ctx.lineWidth=1.2; ctx.beginPath(); ctx.roundRect(glassX+.6,glassY+.6,glassW-1.2,glassH-1.2,10); ctx.stroke(); ctx.restore();
+
+    // === 2 KOLOM VIRTUAL 30% : 5px : 65% - V-center & H-center dari batas akrilik ===
+    const col1W = glassW * 0.30;
+    const col2W = glassW * 0.65;
+    const gap = 5;
+    const col1X = glassX;
+    const col2X = glassX + col1W + gap;
+    // Logo diameter menyesuaikan kolom 30%
+    const logoDrawBase = isWA ? 56 : 48;
+    const logoDraw = Math.min(logoDrawBase, Math.max(32, col1W - 6));
+    const logoX = col1X + (col1W - logoDraw)/2 + 7; // geser kanan 7px + H-center dalam col1
+    const logoY = glassY + glassH/2 - logoDraw/2; // V-center dari akrilik
+    // Hitung tinggi block teks col2 untuk V-center
+    const tmpAlamatForBlock = showA&&alamat?wrap(ctx,'📍 '+alamat,col2W-16,'9px Inter, Arial'):[]; 
+    const namaH = 24; // font 22px + padding
+    const alamatH = tmpAlamatForBlock.length>0 ? (tmpAlamatForBlock.length*10) : 0;
+    const hpH = (showH&&hp) ? 11 : 0;
+    const blockGap = 7;
+    let blockH = namaH;
+    if(alamatH>0) blockH += blockGap + alamatH;
+    if(hpH>0) blockH += blockGap + hpH;
+    const blockStartY = glassY + glassH/2 - blockH/2; // V-center block teks dari akrilik
+    let hy = blockStartY;
+
     if(hasLogo){
       const src=setting.logoPNG||setting.logoThermal;
-      const logoDraw=Math.min(logoSize,Math.max(28,glassH*.38));
-      if(logoImageCache[src]){
-        ctx.save(); ctx.shadowColor='rgba(48,0,55,.38)'; ctx.shadowBlur=9; ctx.shadowOffsetY=3;
-        ctx.beginPath(); ctx.roundRect((LW-logoDraw)/2-3,hy-2,logoDraw+6,logoDraw+6,10); ctx.fillStyle='rgba(255,255,255,.98)'; ctx.fill(); ctx.restore();
-        ctx.save(); ctx.beginPath(); ctx.roundRect((LW-logoDraw)/2,hy,logoDraw,logoDraw,8); ctx.clip(); ctx.drawImage(logoImageCache[src],(LW-logoDraw)/2,hy,logoDraw,logoDraw); ctx.restore();
-      }else{ loadLogoImage(src).then(()=>renderNotaCanvas(canvas,nota,pel,setting,outletNama)).catch(()=>{}); }
-      hy+=logoDraw+5;
+      if(typeof logoImageCache!=='undefined' && logoImageCache[src]){
+        ctx.save(); ctx.shadowColor='rgba(48,0,55,.38)'; ctx.shadowBlur=10; ctx.shadowOffsetY=4;
+        ctx.fillStyle='rgba(255,255,255,.98)'; ctx.beginPath(); ctx.roundRect(logoX-2,logoY-2,logoDraw+4,logoDraw+4,14); ctx.fill(); ctx.restore();
+        ctx.save(); ctx.beginPath(); ctx.roundRect(logoX,logoY,logoDraw,logoDraw,12); ctx.clip();
+        ctx.drawImage(logoImageCache[src],logoX,logoY,logoDraw,logoDraw); ctx.restore();
+        ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1; ctx.beginPath(); ctx.roundRect(logoX,logoY,logoDraw,logoDraw,12); ctx.stroke();
+      } else { loadLogoImage(src).then(()=>{ try{ renderNotaCanvas(canvas,nota,pel,setting,outletNama); }catch(e){} }).catch(()=>{}); }
     }
     if(showN){
-      ctx.fillStyle='#ffffff'; ctx.textAlign='center'; ctx.font='bold 15px Inter, Arial';
-      ctx.shadowColor='rgba(66,0,52,.48)'; ctx.shadowBlur=4; ctx.shadowOffsetY=2;
-      ctx.fillText(String(outletNama||'Laundry Land'),LW/2,hy+12,glassW-12); ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
-      hy+=19;
+      ctx.save(); ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillStyle='#ffffff'; ctx.font='bold 22px Inter, Arial'; // 20-24px
+      ctx.shadowColor='rgba(66,0,52,.55)'; ctx.shadowBlur=6; ctx.shadowOffsetY=2;
+      const namaX = col2X + col2W/2; // H-center murni dari kolom 65%
+      const namaY = hy + 12;
+      const outletText = String(outletNama||'Laundry Land');
+      // wrap nama kalau panjang
+      const namaLines = wrap(ctx, outletText, col2W-10, 'bold 22px Inter, Arial');
+      if(namaLines.length>1){
+        namaLines.slice(0,2).forEach((line,idx)=>{
+          ctx.fillText(line, namaX, namaY + idx*20, col2W-10);
+        });
+        hy += namaLines.length*20;
+      } else {
+        ctx.fillText(outletText, namaX, namaY, col2W-10);
+        hy += namaH;
+      }
+      ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.restore();
     }
-    ctx.font='8px Inter, Arial'; ctx.fillStyle='rgba(255,255,255,.98)';
+    ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle='rgba(255,255,255,.98)';
     if(showA&&alamat){
-      const lines=wrap(ctx,alamat,glassW-16,'8px Inter, Arial');
-      lines.slice(0,3).forEach(line=>{ctx.fillText(line,LW/2,hy,glassW-12);hy+=10;});
-      hy+=2;
+      ctx.font='9px Inter, Arial';
+      const lines=wrap(ctx,'📍 '+alamat,col2W-16,'9px Inter, Arial');
+      hy+=blockGap;
+      lines.slice(0,2).forEach(line=>{
+        ctx.fillText(line, col2X+col2W/2, hy, col2W-16);
+        hy+=10;
+      });
     }
-    if(showH&&hp){ ctx.font='bold 8px Inter, Arial'; ctx.fillText(String(hp),LW/2,hy+2,glassW-12); hy+=11; }
+    if(showH&&hp){
+      ctx.font='bold 9px Inter, Arial'; ctx.fillStyle='rgba(255,255,255,.98)';
+      const hpIcon = '📱 '+String(hp);
+      hy+=blockGap;
+      ctx.fillText(hpIcon, col2X+col2W/2, hy+2, col2W-16);
+      hy+=11;
+    }
     y+=headerH+10;
+
+
+    
     if(showJam){
       ctx.fillStyle='#ecfdf5'; ctx.beginPath(); ctx.roundRect(pad,y,inner,28,8); ctx.fill(); ctx.strokeStyle='#a7f3d0'; ctx.lineWidth=0.9; ctx.stroke();
-      ctx.fillStyle='#065f46'; ctx.font='bold 7.5px Inter, Arial'; ctx.textAlign='center';
+      ctx.fillStyle='#065f46'; ctx.font='bold 12.5px Inter, Arial'; ctx.textAlign='center';
       ctx.fillText('Jam Buka '+jamBuka, LW/2, y+10, inner-8);
-      ctx.font='6.5px Inter, Arial'; ctx.fillText('Istirahat '+istirahat, LW/2, y+20, inner-8);
+      ctx.font='11.5px Inter, Arial'; ctx.fillText('Istirahat '+istirahat, LW/2, y+20, inner-8);
       y+=28+10;
     }
-    const boxInfoH=70; // FIX v24: padding 15px + space vertikal 8px antar baris horizontal
-    ctx.fillStyle='#fffafc'; ctx.beginPath(); ctx.roundRect(pad,y,inner,boxInfoH,10); ctx.fill(); ctx.strokeStyle='#f9d6e8'; ctx.lineWidth=0.8; ctx.stroke();
-    ctx.textAlign='left'; ctx.fillStyle='#6b7280'; ctx.font='8px Inter, Arial';
-    ctx.fillText('No Nota', pad+15, y+15); ctx.fillStyle='#111827'; ctx.font='bold 9px Inter, Arial'; ctx.textAlign='right';
-    ctx.fillText(String(nota.no_nota||''), pad+inner-15, y+15, 110);
-    ctx.fillStyle='#e5e7eb'; ctx.fillRect(pad+15, y+23, inner-30, 0.8); // 15+8=23
-    ctx.textAlign='left'; ctx.fillStyle='#6b7280'; ctx.font='8px Inter, Arial'; ctx.fillText('Tanggal', pad+15, y+31); // 23+8=31
-    ctx.fillStyle='#4b5563'; ctx.font='8px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(formatTanggalNota(nota.tanggal), pad+inner-15, y+31, 110);
-    ctx.fillStyle='#e5e7eb'; ctx.fillRect(pad+15, y+39, inner-30, 0.8); // 31+8=39
-    ctx.textAlign='left'; ctx.fillStyle='#6b7280'; ctx.font='8px Inter, Arial'; ctx.fillText('Nama Pelanggan', pad+15, y+47); // 39+8=47
-    ctx.fillStyle='#111827'; ctx.font='bold 9.5px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(String(pel&&pel.nama||'PELANGGAN').toUpperCase(), pad+inner-15, y+47, 110);
+    const boxInfoH=92;
+    ctx.fillStyle='#fffafc'; ctx.beginPath(); ctx.roundRect(pad,y,inner,boxInfoH,12); ctx.fill(); ctx.strokeStyle='#f9d6e8'; ctx.lineWidth=0.8; ctx.stroke();
+    ctx.textAlign='left'; ctx.fillStyle='#6b7280'; ctx.font='13px Inter, Arial';
+    ctx.fillText('No Nota', pad+15, y+18); 
+    ctx.fillStyle='#111827'; ctx.font='bold 14px Inter, Arial'; ctx.textAlign='right';
+    ctx.fillText(String(nota.no_nota||''), pad+inner-15, y+18, 130);
+    ctx.fillStyle='#e5e7eb'; ctx.fillRect(pad+15, y+28, inner-30, 0.8);
+    ctx.textAlign='left'; ctx.fillStyle='#6b7280'; ctx.font='13px Inter, Arial'; ctx.fillText('Tanggal', pad+15, y+38);
+    ctx.fillStyle='#4b5563'; ctx.font='13px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(formatTanggalNota(nota.tanggal), pad+inner-15, y+38, 130);
+    ctx.fillStyle='#e5e7eb'; ctx.fillRect(pad+15, y+48, inner-30, 0.8);
+    ctx.textAlign='left'; ctx.fillStyle='#6b7280'; ctx.font='13px Inter, Arial'; ctx.fillText('Nama Pelanggan', pad+15, y+61);
+    ctx.fillStyle='#111827'; ctx.font='bold 16px Inter, Arial'; ctx.textAlign='right';
+    ctx.fillText(String(pel&&pel.nama||'PELANGGAN').toUpperCase(), pad+inner-15, y+61, 150);
     y+=boxInfoH+12;
-    ctx.fillStyle='#fdf2f8'; ctx.beginPath(); ctx.roundRect(pad,y,inner,16,8); ctx.fill();
-    ctx.fillStyle='#ec4899'; ctx.font='bold 7.5px Inter, Arial'; ctx.textAlign='left'; ctx.fillText('DETAIL LAYANAN ✨', pad+10, y+10);
-    y+=20;
+    ctx.fillStyle='#fdf2f8'; ctx.beginPath(); ctx.roundRect(pad,y,inner,20,8); ctx.fill();
+    ctx.fillStyle='#ec4899'; ctx.font='bold 12.5px Inter, Arial'; ctx.textAlign='left'; ctx.fillText('DETAIL LAYANAN ✨', pad+10, y+13);
+    y+=24;
     minRows.forEach(({it,qty,min})=>{
       const harga=parseFloat(it.harga)||0, qtyTagih=Math.max(qty,min), subtotal=Math.round(harga*qtyTagih);
       const nama=(it.jenis||'LAYANAN').toUpperCase().substring(0,30);
       const detail= qty+' '+(it.satuan||'Kg')+' × '+formatRp(harga);
-      const rowH=30;
-      ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.roundRect(pad,y,inner,rowH,8); ctx.fill(); ctx.strokeStyle='#f9d6e8'; ctx.lineWidth=0.7; ctx.stroke();
-      ctx.fillStyle='#f9a8d4'; ctx.beginPath(); ctx.arc(pad+8, y+12, 3, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle='#111827'; ctx.font='bold 8px Inter, Arial'; ctx.textAlign='left'; ctx.fillText(nama, pad+16, y+12, inner-60);
-      ctx.fillStyle='#111827'; ctx.font='bold 8.5px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(formatRp(subtotal), pad+inner-8, y+12, 70);
-      ctx.fillStyle='#6b7280'; ctx.font='6.5px Inter, Arial'; ctx.textAlign='left'; ctx.fillText(detail, pad+16, y+22, inner-20);
-      y+=rowH+8; // FIX v24: space vertikal 8px antar baris horizontal
+      const rowH=38;
+      ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.roundRect(pad,y,inner,rowH,10); ctx.fill(); ctx.strokeStyle='#f9d6e8'; ctx.lineWidth=0.7; ctx.stroke();
+      ctx.fillStyle='#f9a8d4'; ctx.beginPath(); ctx.arc(pad+10, y+14, 4, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle='#111827'; ctx.font='bold 13px Inter, Arial'; ctx.textAlign='left'; ctx.fillText(nama, pad+20, y+14, inner-70);
+      ctx.fillStyle='#111827'; ctx.font='bold 14px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(formatRp(subtotal), pad+inner-10, y+14, 90);
+      ctx.fillStyle='#6b7280'; ctx.font='11.5px Inter, Arial'; ctx.textAlign='left'; ctx.fillText(detail, pad+20, y+28, inner-20);
+      y+=rowH+8;
       if(it.isMinimal||qty<min){
-        ctx.fillStyle='#fff1f2'; ctx.beginPath(); ctx.roundRect(pad,y,inner,16,6); ctx.fill(); ctx.strokeStyle='#fecdd3'; ctx.stroke();
-        ctx.fillStyle='#e11d48'; ctx.font='bold 6px Inter, Arial'; ctx.textAlign='center'; ctx.fillText('Minimal '+min+' '+(it.satuan||'')+' - ditagih '+min, LW/2, y+10, inner-8); y+=20;
+        ctx.fillStyle='#fff1f2'; ctx.beginPath(); ctx.roundRect(pad,y,inner,18,6); ctx.fill(); ctx.strokeStyle='#fecdd3'; ctx.stroke();
+        ctx.fillStyle='#e11d48'; ctx.font='bold 10px Inter, Arial'; ctx.textAlign='center'; ctx.fillText('Minimal '+min+' '+(it.satuan||'')+' - ditagih '+min, LW/2, y+12, inner-8); y+=22;
       }
     });
     y+=8;
     const estText='⏰ Estimasi: '+formatTanggalNota(nota.estimasi);
-    ctx.fillStyle='#ecfdf5'; ctx.beginPath(); ctx.roundRect(pad+12, y, inner-24, 18, 14); ctx.fill(); ctx.strokeStyle='#a7f3d0'; ctx.lineWidth=0.9; ctx.stroke();
-    ctx.fillStyle='#065f46'; ctx.font='bold 7px Inter, Arial'; ctx.textAlign='center'; ctx.fillText(estText, LW/2, y+11, inner-30);
-    y+=18+14;
+    ctx.fillStyle='#ecfdf5'; ctx.beginPath(); ctx.roundRect(pad+12, y, inner-24, 22, 14); ctx.fill(); ctx.strokeStyle='#a7f3d0'; ctx.lineWidth=0.9; ctx.stroke();
+    ctx.fillStyle='#065f46'; ctx.font='bold 12px Inter, Arial'; ctx.textAlign='center'; ctx.fillText(estText, LW/2, y+14, inner-30);
+    y+=22+14;
     const isDPCheck=nota.statusBayar==='HUTANG(DP)' || (nota.dpBayar&&nota.dpBayar>0&&nota.statusBayar!=='Lunas');
-    const totalH= isDPCheck ? 68 : 52;
+    const totalH= isDPCheck ? 78 : 62;
     ctx.fillStyle='#fffafc'; ctx.beginPath(); ctx.roundRect(pad,y,inner,totalH,12); ctx.fill(); ctx.strokeStyle='#f9d6e8'; ctx.lineWidth=0.8; ctx.stroke();
-    ctx.fillStyle='#6b7280'; ctx.font='8px Inter, Arial'; ctx.textAlign='left'; ctx.fillText('Total Pembayaran', pad+10, y+18);
-    ctx.fillStyle='#ec4899'; ctx.font='bold 16px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(formatRp(nota.jumlah||0), pad+inner-10, y+20, 110);
+    ctx.fillStyle='#6b7280'; ctx.font='13px Inter, Arial'; ctx.textAlign='left'; ctx.fillText('Total Pembayaran', pad+12, y+20);
+    ctx.fillStyle='#ec4899'; ctx.font='bold 22px Inter, Arial'; ctx.textAlign='right'; ctx.fillText(formatRp(nota.jumlah||0), pad+inner-12, y+22, 140);
     const lunasText=(nota.statusBayar||'Belum Lunas').toUpperCase();
     const isLunas=nota.statusBayar==='Lunas';
     const isDP=nota.statusBayar==='HUTANG(DP)';
-    ctx.fillStyle=isLunas?'#10b981':(isDP?'#f59e0b':'#ef4444'); ctx.beginPath(); ctx.roundRect(LW/2-36, y+30, 72, 16, 8); ctx.fill();
-    ctx.fillStyle='#fff'; ctx.font='bold 7px Inter, Arial'; ctx.textAlign='center'; ctx.fillText((isLunas?'✓ ':'' )+lunasText, LW/2, y+40);
-    // MODERN v21.5 FIX: DP & sisa di canvas PNG biar thermal tidak kosong
+    ctx.fillStyle=isLunas?'#10b981':(isDP?'#f59e0b':'#ef4444'); ctx.beginPath(); ctx.roundRect(LW/2-48, y+34, 96, 22, 10); ctx.fill();
+    ctx.fillStyle='#fff'; ctx.font='bold 12px Inter, Arial'; ctx.textAlign='center'; ctx.fillText((isLunas?'✓ ':'' )+lunasText, LW/2, y+48);
     if(isDPCheck){
       const dpTxt = 'DP: '+formatRp(nota.dpBayar||0)+' | Sisa: '+formatRp(nota.sisaHutang||0);
-      ctx.fillStyle='#92400e'; ctx.font='bold 6.5px Inter, Arial'; ctx.textAlign='center';
-      ctx.fillText(dpTxt, LW/2, y+50, inner-10);
-      // riwayat DP kecil
+      ctx.fillStyle='#92400e'; ctx.font='bold 11px Inter, Arial'; ctx.textAlign='center';
+      ctx.fillText(dpTxt, LW/2, y+62, inner-10);
       if(Array.isArray(nota.riwayatBayar) && nota.riwayatBayar.length>0){
         const riw = nota.riwayatBayar.map(r=>formatRp(r.bayar)+' '+r.metode).join('→');
-        ctx.font='5.5px Inter, Arial'; ctx.fillStyle='#b45309';
-        ctx.fillText(riw, LW/2, y+58, inner-10);
+        ctx.font='9.5px Inter, Arial'; ctx.fillStyle='#b45309';
+        ctx.fillText(riw, LW/2, y+72, inner-10);
       }
-      y+= (Array.isArray(nota.riwayatBayar)&&nota.riwayatBayar.length>0 ? 16 : 8);
+      y+= (Array.isArray(nota.riwayatBayar)&&nota.riwayatBayar.length>0 ? 20 : 10);
     }
-    y+=totalH+12;
-    const footerH=34;
+    y+=totalH+14;
+    const footerH=42;
     const footerGrad=ctx.createLinearGradient(pad,y,pad,y+footerH); footerGrad.addColorStop(0,'#f618a9'); footerGrad.addColorStop(1,'#d946ef');
     ctx.fillStyle=footerGrad; ctx.beginPath(); ctx.roundRect(pad,y,inner,footerH,12); ctx.fill();
-    ctx.fillStyle='#ffffff'; ctx.font='bold 8px Inter, Arial'; ctx.textAlign='center'; ctx.fillText('LaundryLand • Rapi • Wangi • Elegan', LW/2, y+13, inner-10);
-    ctx.font='6.5px Inter, Arial'; ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.fillText('Terima kasih telah mempercayakan laundry Anda 🙏', LW/2, y+24, inner-10);
-    y+=footerH+8;
-    ctx.fillStyle='#9ca3af'; ctx.font='5.5px Inter, Arial'; ctx.textAlign='center';
+    ctx.fillStyle='#ffffff'; ctx.font='bold 13px Inter, Arial'; ctx.textAlign='center'; ctx.fillText('LaundryLand • Rapi • Wangi • Elegan', LW/2, y+16, inner-10);
+    ctx.font='11.5px Inter, Arial'; ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.fillText('Terima kasih telah mempercayakan laundry Anda 🙏', LW/2, y+30, inner-10);
+    y+=footerH+10;
+    ctx.fillStyle='#9ca3af'; ctx.font='9.5px Inter, Arial'; ctx.textAlign='center';
     ctx.fillText("Original Created by LaundryLand's Project", LW/2, y+6, inner-10);
     return true;
-  }catch(e){ console.error('renderNotaCanvas elegant logo header', e); return false; }
+  }catch(e){ console.error('renderNotaCanvas', e); return false; }
 }
+
 
 
 
@@ -6666,32 +6746,230 @@ function updatePreviewNotaBluetooth(){
 
 
 
-async function cetakNotaBluetooth(){
+
+// ===== FIXED v22.2 - CETAK THERMAL & WA BISNIS TERPISAH - CANCEL = TUTUP =====
+async function cetakNotaThermalNative(){
   try{
-    const notaId = currentPreviewNotaId || (DB.notas[0]?.id);
+    const notaId = window.currentPreviewNotaId || (DB.notas[0]?.id);
     if(!notaId){ alert('Pilih nota dulu'); return; }
-    // Filter hanya thermal - abaikan bluetooth lain
-    if(!isBluetoothConnected || !bluetoothCharacteristic){
-      const statusEl = document.getElementById('bluetoothStatus');
-      if(statusEl){ statusEl.style.display='block'; statusEl.textContent='🔍 Mencari printer thermal...'; statusEl.style.background='#fef3c7'; }
-      const char = await connectBluetoothPrinter();
-      if(!char){
-        // Fallback ke preview window jika bluetooth tidak ada
-        if(typeof printThermalWindowDirect==='function'){ printThermalWindowDirect(notaId); closeModal('modalBluetoothPrint'); }
+    const nota = DB.notas.find(n=>n.id===notaId) || DB.notas[0];
+    if(!nota){ alert('Nota tidak ditemukan'); return; }
+    
+    const statusEl = document.getElementById('bluetoothStatus');
+    const btn = document.getElementById('btnCetakThermal58');
+    const originalText = btn ? btn.innerHTML : '';
+    
+    try{
+      if(btn){ btn.disabled=true; btn.innerHTML='⏳ Mencetak...'; }
+      if(statusEl){ statusEl.style.display='block'; statusEl.textContent='🖨️ Menyiapkan cetak...'; statusEl.style.background='#fef3c7'; }
+
+      // NATIVE APK MODE
+      if(window.LaundryNative && window.LaundryNative.isNative){
+        let printerAddr = localStorage.getItem('last_printer_address');
+        let printers = [];
+        try{ printers = await LaundryNative.getPrinters(); }catch(e){}
+
+        if(!printerAddr && printers.length>0){
+          if(printers.length===1){
+            printerAddr = printers[0].address;
+          } else {
+            let list = printers.map((p,i)=> `${i+1}. ${p.name} (${p.address})`).join('\n');
+            let sel = prompt('Pilih printer:\n'+list+'\nMasukkan nomor:');
+            if(sel){
+              let idx = parseInt(sel)-1;
+              if(printers[idx]) printerAddr = printers[idx].address;
+            }
+          }
+        }
+
+        if(!printerAddr && printers.length>0) printerAddr = printers[0].address;
+        if(!printerAddr){
+          alert('⚠️ Printer belum paired.\n\n1. Buka Settings HP > Bluetooth\n2. Pair printer 58mm (RPP02N/Printer)\n3. Coba lagi');
+          if(statusEl){ statusEl.textContent='❌ Printer belum paired'; statusEl.style.background='#fecaca'; }
+          return;
+        }
+
+        localStorage.setItem('last_printer_address', printerAddr);
+        
+        // Generate image dari preview jika bisa
+        let base64Image = null;
+        const previewEl = document.getElementById('previewNotaBluetooth');
+        if(previewEl && window.html2canvas){
+          try{
+            const canvas = await html2canvas(previewEl, {scale:2, backgroundColor:'#ffffff', width: 384});
+            base64Image = canvas.toDataURL('image/png');
+          }catch(e){ console.warn('html2canvas failed', e); }
+        }
+
+        if(base64Image){
+          await LaundryNative.print58mm({imageBase64: base64Image, printerAddress: printerAddr, cut:true});
+        } else {
+          // Fallback text
+          const pel = DB.pelanggans.find(p=>p.id===nota.pelanggan_id) || {nama:'Pelanggan'};
+          const text = `${nota.no_nota}\n${pel.nama}\n${typeof formatRp==='function'?formatRp(nota.jumlah):nota.jumlah}\nTerima kasih`;
+          await LaundryNative.print58mm({text: text, printerAddress: printerAddr, cut:true});
+        }
+
+        if(statusEl){ statusEl.textContent='✅ Terkirim ke printer '+printerAddr; statusEl.style.background='#bbf7d0'; }
+        setTimeout(()=>{ closeModal('modalBluetoothPrint'); }, 1000);
         return;
       }
-    }
-    // Jika sudah konek, cetak
-    if(typeof printViaBluetooth==='function'){
-      const ok = await printViaBluetooth(notaId);
-      if(ok){ 
-        const statusEl = document.getElementById('bluetoothStatus');
-        if(statusEl){ statusEl.style.display='block'; statusEl.textContent='✅ Nota tercetak'; statusEl.style.background='#bbf7d0'; }
-        setTimeout(()=>closeModal('modalBluetoothPrint'), 800);
+
+      // WEB BLUETOOTH MODE (browser)
+      if(typeof isBluetoothConnected!=='undefined' && (!isBluetoothConnected || !bluetoothCharacteristic)){
+        if(statusEl){ statusEl.textContent='🔍 Mencari printer thermal...'; statusEl.style.background='#fef3c7'; }
+        const char = await connectBluetoothPrinter();
+        if(!char){
+          if(typeof printThermalWindowDirect==='function'){ 
+            printThermalWindowDirect(notaId); 
+            closeModal('modalBluetoothPrint'); 
+          }
+          return;
+        }
       }
+      
+      if(typeof printViaBluetooth==='function'){
+        const ok = await printViaBluetooth(notaId);
+        if(ok){ 
+          if(statusEl){ statusEl.textContent='✅ Nota tercetak'; statusEl.style.background='#bbf7d0'; }
+          setTimeout(()=>closeModal('modalBluetoothPrint'), 800);
+        }
+      } else if(typeof printThermalDirect==='function'){
+        printThermalDirect(notaId);
+        closeModal('modalBluetoothPrint');
+      }
+
+    }finally{
+      if(btn){ btn.disabled=false; btn.innerHTML=originalText; }
     }
-  }catch(e){ alert('Gagal cetak: '+(e.message||e)); }
+  }catch(e){ 
+    console.error(e);
+    alert('❌ Gagal cetak: '+(e.message||e)); 
+    const statusEl = document.getElementById('bluetoothStatus');
+    if(statusEl){ statusEl.textContent='❌ Error: '+(e.message||e); statusEl.style.background='#fecaca'; }
+  }
 }
+
+async function kirimNotaWABisnisNative(){
+  try{
+    const notaId = window.currentPreviewNotaId || (DB.notas[0]?.id);
+    if(!notaId){ alert('Pilih nota dulu'); return; }
+    const nota = DB.notas.find(n=>n.id===notaId) || DB.notas[0];
+    const pel = DB.pelanggans.find(p=>p.id===nota.pelanggan_id) || {nama:'Pelanggan', nohp:''};
+    
+    const statusEl = document.getElementById('bluetoothStatus');
+    const btn = document.getElementById('btnKirimWABisnis');
+    const originalText = btn ? btn.innerHTML : '';
+    
+    try{
+      if(btn){ btn.disabled=true; btn.innerHTML='⏳ Menyiapkan...'; }
+      if(statusEl){ statusEl.style.display='block'; statusEl.textContent='📲 Menyiapkan gambar WA...'; statusEl.style.background='#dcfce7'; }
+
+      // Generate canvas PNG untuk WA
+      let canvasEl = document.getElementById('canvasPNG');
+      let base64Image = null;
+      
+      // Coba render canvas nota resmi jika ada
+      if(typeof renderNotaCanvas==='function' && canvasEl){
+        try{
+          const out = DB.outlets.find(o=>o.id===nota.outlet_id) || DB.outlets.find(o=>o.aktif) || DB.outlets[0];
+          const setting = DB.setting.nota || {};
+          const outletNama = out?out.nama:'Laundry Land';
+          renderNotaCanvas(canvasEl, nota, pel, setting, outletNama);
+          base64Image = canvasEl.toDataURL('image/png');
+        }catch(e){ console.warn('renderNotaCanvas failed', e); }
+      }
+      
+      // Fallback pakai html2canvas dari preview
+      if(!base64Image){
+        const previewEl = document.getElementById('previewNotaBluetooth');
+        if(previewEl && window.html2canvas){
+          const canvas = await html2canvas(previewEl, {scale:2, backgroundColor:'#ffffff'});
+          base64Image = canvas.toDataURL('image/png');
+        } else if(previewEl){
+          // Last fallback - text only
+          base64Image = null;
+        }
+      }
+
+      // NATIVE APK MODE
+      if(window.LaundryNative && window.LaundryNative.isNative){
+        if(!base64Image){
+          alert('❌ Gagal buat gambar nota');
+          return;
+        }
+        let phone = pel.nohp || '';
+        // Tanya nomor jika kosong
+        if(!phone){
+          phone = prompt('No WA Customer (08...):', '') || '';
+        } else {
+          // Konfirmasi nomor
+          let confirmPhone = confirm('Kirim ke '+pel.nama+' ('+phone+')?\nOK = Ya\nCancel = Ganti nomor');
+          if(!confirmPhone){
+            phone = prompt('No WA Customer:', phone) || '';
+          }
+        }
+
+        // Bersihkan format nomor
+        if(phone){
+          phone = phone.replace(/[^0-9+]/g, '');
+          if(phone.startsWith('0')) phone = '62' + phone.substring(1);
+          if(phone.startsWith('+')) phone = phone.substring(1);
+        }
+
+        await LaundryNative.shareNotaWA({
+          imageBase64: base64Image,
+          phone: phone,
+          text: `*${nota.no_nota}* - ${pel.nama}\nTotal: ${typeof formatRp==='function'?formatRp(nota.jumlah):nota.jumlah}\nTerima kasih sudah laundry di LaundryLand 🙏`,
+          fileName: `${nota.no_nota}.png`
+        });
+
+        if(statusEl){ statusEl.textContent='✅ Dibuka di WA Bisnis'; statusEl.style.background='#bbf7d0'; }
+        setTimeout(()=>{ closeModal('modalBluetoothPrint'); }, 800);
+        return;
+      }
+
+      // WEB MODE - pakai fungsi lama kirim WA
+      if(typeof kirimGambarWA==='function'){
+        await kirimGambarWA(notaId);
+        closeModal('modalBluetoothPrint');
+      } else if(typeof shareGambarNotaTanpaDownload==='function'){
+        await shareGambarNotaTanpaDownload(notaId);
+        closeModal('modalBluetoothPrint');
+      } else if(base64Image){
+        // Fallback download + open wa.me
+        const a = document.createElement('a');
+        a.href = base64Image;
+        a.download = nota.no_nota+'.png';
+        a.click();
+        
+        let waPhone = pel.nohp ? pel.nohp.replace(/[^0-9]/g,'') : '';
+        if(waPhone.startsWith('0')) waPhone = '62'+waPhone.substring(1);
+        let waText = encodeURIComponent(`*${nota.no_nota}* - ${pel.nama} - Total ${typeof formatRp==='function'?formatRp(nota.jumlah):nota.jumlah}`);
+        if(waPhone){
+          window.open(`https://wa.me/${waPhone}?text=${waText}`, '_blank');
+        } else {
+          window.open(`https://wa.me/?text=${waText}`, '_blank');
+        }
+        closeModal('modalBluetoothPrint');
+      }
+
+    }finally{
+      if(btn){ btn.disabled=false; btn.innerHTML=originalText; }
+    }
+  }catch(e){
+    console.error(e);
+    alert('❌ Gagal kirim WA: '+(e.message||e));
+    const statusEl = document.getElementById('bluetoothStatus');
+    if(statusEl){ statusEl.textContent='❌ Error: '+(e.message||e); statusEl.style.background='#fecaca'; }
+  }
+}
+
+// Override cetakNotaBluetooth lama biar tidak bingung - arahkan ke thermal
+async function cetakNotaBluetooth(){
+  return cetakNotaThermalNative();
+}
+
 
 // Hook untuk update preview saat modal dibuka
 (function(){
@@ -7777,19 +8055,17 @@ function downloadCSV(filename, csvContent){
 }
 function exportLayananCSV(){
   try{
-    let list = DB.layanans || [];
-    if(currentOutletId && DB.outlets.length>1){
-      list = list.filter(l=> !l.outlet_id || l.outlet_id===currentOutletId);
-    }
+    const outletId = currentOutletId||DB.outlets[0]?.id||'outlet_1';
+    let list = (DB.layanans||[]).filter(l=> (l.outlet_id||'')===outletId);
     let csv = "Kode,Nama,Harga,Satuan,MinQty,EstimasiJenis,EstimasiNilai,Outlet\n";
     list.forEach(l=>{
-      const outletNama = DB.outlets.find(o=>o.id===l.outlet_id)?.nama || 'Global';
+      const outletNama = DB.outlets.find(o=>o.id===l.outlet_id)?.nama || 'Outlet';
       const row = [l.kode, `"${(l.nama||'').replace(/"/g,'""')}"`, l.harga, l.satuan, l.min_qty||1, l.estimasi_jenis||'Hari', l.estimasi_nilai||1, outletNama].join(',');
       csv += row + "\n";
     });
     const prefix = getOutletPrefix();
     downloadCSV(prefix+'_layanan_'+new Date().toISOString().slice(0,10)+'.csv', csv);
-    showToastSuccess('Export '+list.length+' layanan ('+prefix+') ✅');
+    showToastSuccess('Export '+list.length+' layanan independen ('+prefix+') ✅');
   }catch(e){logError(e);}
 }
 
@@ -7819,30 +8095,13 @@ function buildInfoHTMLContent(){
       if(j.includes('hari')) return n<=1;
       return false;
     }
-    // Build outlet price map: kode -> variants, NO GLOBAL LABEL, DEDUP, GLOBAL EXPANDED TO ALL OUTLETS
+    // Build outlet price map: kode -> variants, STRICT PER OUTLET - HAPUS GLOBAL v28.2
     const layananByKode = {};
     layanans.forEach(l=>{
       const kode = (l.kode||'').trim().toUpperCase();
       if(!kode) return;
+      if(!l.outlet_id) return;
       if(!layananByKode[kode]) layananByKode[kode]=[];
-      // Jika tanpa outlet_id (GLOBAL) -> expand ke semua outlet biar gak hilang, tapi jangan tampil label Global
-      if(!l.outlet_id){
-        // Jika ada outletMap, buat varian untuk tiap outlet
-        if(outlets.length>0){
-          outlets.forEach(o=>{
-            if(!layananByKode[kode].some(v=>v.outlet_id===o.id)){
-              // clone dengan outlet_id
-              layananByKode[kode].push({...l, outlet_id:o.id, _isGlobalExpanded:true});
-            }
-          });
-        }else{
-          // Jika belum ada outlet sama sekali, tetap masukin 1 sebagai global expanded (akan tampil LL)
-          if(!layananByKode[kode].some(v=>v.outlet_id==='global_expanded')){
-            layananByKode[kode].push({...l, outlet_id:'global_expanded', _isGlobalExpanded:true});
-          }
-        }
-        return;
-      }
       if(outlets.length>0 && !outletMap[l.outlet_id]) return; // outlet tidak dikenal skip
       // hindari duplikat outlet_id sama di kode sama
       if(!layananByKode[kode].some(v=>v.outlet_id===l.outlet_id)){
@@ -8568,68 +8827,59 @@ function previewImportLayanan(){
 function prosesImportLayanan(){
   try{
     if(parsedLayananImport.length===0){ const text=document.getElementById('importLayananText').value; parsedLayananImport=parseLayananCSV(text); }
-    if(parsedLayananImport.length===0) return alert('Tidak ada data untuk diimport - cek apakah Nama kosong? Centang Abaikan Kode CSV');
-    let add=0, edit=0, skipDup=0;
-    const ignoreKode = true; // selalu true
-    const skipDuplikat = document.getElementById('skipDuplikatLayanan')?.checked ?? true;
-    
-    // Buat map nama existing untuk cek duplikat cepat
+    if(parsedLayananImport.length===0) return alert('Tidak ada data untuk diimport - cek apakah Nama kosong?');
+    let add=0, skipDup=0;
+    const outletId = currentOutletId||DB.outlets[0]?.id||'outlet_1';
+    const skipDuplikat = document.getElementById('skipDuplikatLayanan')?.checked ?? false;
+    const listOutlet = (DB.layanans||[]).filter(l=> (l.outlet_id||'')===outletId);
     const existingNames = new Map();
-    DB.layanans.forEach(l=>{
+    listOutlet.forEach(l=>{
       const key = l.nama.toLowerCase().trim();
       existingNames.set(key, l);
     });
-    
     parsedLayananImport.forEach(d=>{
       const namaKey = d.nama.toLowerCase().trim();
-      
-      // FIX: Filter duplikat berdasarkan nama (bukan kode)
       if(skipDuplikat && existingNames.has(namaKey)){
         skipDup++;
-        return; // skip duplikat nama
+        return;
       }
-      
-      const existing = DB.layanans.find(l=>l.kode===d.kode);
-      if(existing && !ignoreKode){
-        existing.nama=d.nama; existing.harga=d.harga; existing.satuan=d.satuan; existing.min_qty=d.min_qty; existing.estimasi_jenis=d.estimasi_jenis; existing.estimasi_nilai=d.estimasi_nilai; existing.last_modified=Date.now(); edit++;
-      }else{
-        let finalKode = d.kode;
-        if(ignoreKode || DB.layanans.some(l=>l.kode===d.kode)){
-          // Generate kode baru yang belum ada
-          let counter=1;
-          let base=finalKode.slice(0,3);
-          while(DB.layanans.some(l=>l.kode===finalKode)){
-            counter++;
-            finalKode = base + String(counter).padStart(2,'0');
-            if(counter>99) break;
-          }
+      let finalKode = d.kode;
+      const kodeExistsInOutlet = listOutlet.some(l=>l.kode===finalKode);
+      if(kodeExistsInOutlet){
+        let counter=1;
+        let base=finalKode.slice(0,3);
+        while(listOutlet.some(l=>l.kode===finalKode)){
+          counter++;
+          finalKode = base + String(counter).padStart(2,'0');
+          if(counter>99) break;
         }
-        // Cek lagi duplikat nama sebelum push (double check)
-        if(skipDuplikat && DB.layanans.some(l=>l.nama.toLowerCase().trim()===namaKey)){
-          skipDup++;
-          return;
-        }
-        DB.layanans.push({id:uid(),kode:finalKode,nama:d.nama,harga:d.harga,satuan:d.satuan,min_qty:d.min_qty,estimasi_jenis:d.estimasi_jenis,estimasi_nilai:d.estimasi_nilai,outlet_id:currentOutletId||DB.outlets[0]?.id,last_modified:Date.now()});
-        existingNames.set(namaKey, d);
-        add++;
       }
+      if(skipDuplikat && listOutlet.some(l=>l.nama.toLowerCase().trim()===namaKey)){
+        skipDup++;
+        return;
+      }
+      DB.layanans.push({id:uid(),kode:finalKode,nama:d.nama,harga:d.harga,satuan:d.satuan,min_qty:d.min_qty,estimasi_jenis:d.estimasi_jenis,estimasi_nilai:d.estimasi_nilai,outlet_id:outletId,last_modified:Date.now()});
+      existingNames.set(namaKey, d);
+      add++;
     });
     saveDB(); renderLayanan(); closeModal('modalImportLayanan');
-    document.getElementById('importLayananText').value=''; document.getElementById('importLayananFile').value=''; parsedLayananImport=[];
-    alert(`Import Layanan Selesai!\nTambah baru: ${add}\nEdit massal: ${edit}\nSkip duplikat: ${skipDup}\nTotal: ${DB.layanans.length} layanan (Kode auto generate, ≥24 jam → hari)`);
+    document.getElementById('importLayananText').value=''; 
+    const fileEl=document.getElementById('importLayananFile'); if(fileEl) fileEl.value='';
+    parsedLayananImport=[];
+    const outletName = DB.outlets.find(o=>o.id===outletId)?.nama||'outlet aktif';
+    alert(`Import Layanan Independen Selesai ke ${outletName}!\nTambah baru: ${add}\nSkip duplikat (per outlet): ${skipDup}\nTotal di ${outletName}: ${DB.layanans.filter(l=> (l.outlet_id||'')===outletId).length} layanan`);
   }catch(e){logError(e); alert('Error import layanan: '+e.message);}
 }
 
 function hapusAllLayanan(){
   try{
     if(DB.layanans.length===0) return alert('Tidak ada layanan untuk dihapus');
-    const outletNama = DB.outlets.find(o=>o.id===currentOutletId)?.nama || 'outlet ini';
+    const outletId = currentOutletId||DB.outlets[0]?.id||'outlet_1';
+    const outletNama = DB.outlets.find(o=>o.id===outletId)?.nama || 'outlet ini';
     const countAll = DB.layanans.length;
-    const countOutlet = DB.layanans.filter(l=>(l.outlet_id||DB.outlets[0]?.id)===currentOutletId || !l.outlet_id).length;
-    
+    const countOutlet = DB.layanans.filter(l=> (l.outlet_id||'')===outletId).length;
     const mode = confirm(`Hapus ALL layanan?\n\nPilih:\nOK = Hapus semua ${countAll} layanan (semua outlet)\nCancel = Hapus hanya ${countOutlet} layanan di ${outletNama} saja\n\nKetik "HAPUS" untuk konfirmasi di prompt selanjutnya`);
     if(!mode){
-      // Cancel = hapus hanya outlet aktif
       if(!confirm(`Hapus ${countOutlet} layanan di outlet ${outletNama} saja? Data outlet lain tetap.`)) return;
       const konfirmasi = prompt(`Ketik "HAPUS ${outletNama.toUpperCase()}" untuk hapus ${countOutlet} layanan di ${outletNama}`);
       if(konfirmasi!==`HAPUS ${outletNama.toUpperCase()}`){
@@ -8637,14 +8887,12 @@ function hapusAllLayanan(){
       }
       const before = DB.layanans.length;
       DB.layanans = DB.layanans.filter(l=>{
-        const outletId = l.outlet_id || DB.outlets[0]?.id;
-        return outletId !== currentOutletId;
+        return (l.outlet_id||'') !== outletId;
       });
       const deleted = before - DB.layanans.length;
       saveDB(); renderLayanan(); renderAll();
       alert(`✅ Hapus layanan outlet ${outletNama} selesai!\nDihapus: ${deleted}\nSisa: ${DB.layanans.length}`);
     } else {
-      // OK = hapus semua
       const konfirmasi = prompt(`Ketik "HAPUS SEMUA" untuk hapus ${countAll} layanan di semua outlet (TIDAK BISA DIBATALKAN)`);
       if(konfirmasi!=='HAPUS SEMUA'){
         return alert('Konfirmasi salah, batal hapus');
@@ -8662,19 +8910,17 @@ function hapusAllLayanan(){
 // Pelanggan Export Import
 function exportPelangganCSV(){
   try{
-    let list = DB.pelanggans || [];
-    if(currentOutletId && DB.outlets.length>1){
-      list = list.filter(p=> (p.outlet_id||DB.outlets[0]?.id)===currentOutletId);
-    }
+    const outletId = currentOutletId||DB.outlets[0]?.id||'outlet_1';
+    let list = (DB.pelanggans||[]).filter(p=> (p.outlet_id||'')===outletId);
     let csv = "Nama,NoHP,Alamat,Deposito,Outlet\n";
     list.forEach(p=>{
-      const outletNama = DB.outlets.find(o=>o.id===p.outlet_id)?.nama || 'Global';
+      const outletNama = DB.outlets.find(o=>o.id===p.outlet_id)?.nama || 'Outlet';
       const row = [`"${(p.nama||'').replace(/"/g,'""')}"`, p.nohp||'', `"${(p.alamat||'').replace(/"/g,'""')}"`, p.deposito||0, outletNama].join(',');
       csv += row + "\n";
     });
     const prefix = getOutletPrefix();
     downloadCSV(prefix+'_pelanggan_'+new Date().toISOString().slice(0,10)+'.csv', csv);
-    showToastSuccess('Export '+list.length+' pelanggan ('+prefix+') ✅');
+    showToastSuccess('Export '+list.length+' pelanggan independen ('+prefix+') ✅');
   }catch(e){logError(e);}
 }
 function downloadTemplatePelanggan(){
@@ -8931,41 +9177,39 @@ function prosesImportPelanggan(){
   try{
     if(parsedPelangganImport.length===0){ const text=document.getElementById('importPelangganText').value; parsedPelangganImport=parsePelangganCSV(text); }
     if(parsedPelangganImport.length===0) return alert('Tidak ada data untuk diimport');
-    
     const importTanpaNoHP = document.getElementById('importTanpaNoHP')?.checked || false;
     let filtered = parsedPelangganImport;
     if(!importTanpaNoHP){
       filtered = parsedPelangganImport.filter(d=>d.raw_valid);
     }
     if(filtered.length===0) return alert('Tidak ada data valid (No HP kosong semua). Centang opsi "Import tanpa No HP" jika mau import.');
-    
+    const outletId = currentOutletId||DB.outlets[0]?.id||'outlet_1';
+    const listOutlet = (DB.pelanggans||[]).filter(p=> (p.outlet_id||'')===outletId);
     let add=0, edit=0, skip=0;
     filtered.forEach(d=>{
       let nohp = d.nohp || '';
       if(nohp.startsWith('+62')) nohp='0'+nohp.substring(3);
       else if(nohp.startsWith('62') && nohp.length>=10) nohp='0'+nohp.substring(2);
-      
-      const existing = nohp ? DB.pelanggans.find(p=>p.nohp===nohp) : null;
+      const existing = nohp ? listOutlet.find(p=>p.nohp===nohp) : null;
       if(existing){
         existing.nama=d.nama; if(d.alamat) existing.alamat=d.alamat; 
-        // Update outlet_id jika belum ada atau jika import ke outlet aktif
-        if(!existing.outlet_id) existing.outlet_id = currentOutletId||DB.outlets[0]?.id;
+        existing.outlet_id = outletId;
         if(d.deposito !== existing.deposito){
           const before = existing.deposito;
           existing.deposito = d.deposito;
           try{
             const hist = JSON.parse(localStorage.getItem('laundryland_deposito_history')||'[]');
-            hist.push({id:uid(),pelanggan_id:existing.id,nama:existing.nama,tipe:'EDIT',nominal:Math.abs(d.deposito-before),before,after:d.deposito,keterangan:'Edit massal via import CSV pelanggan',tanggal:Date.now(),outlet_id:currentOutletId||DB.outlets[0].id});
+            hist.push({id:uid(),pelanggan_id:existing.id,nama:existing.nama,tipe:'EDIT',nominal:Math.abs(d.deposito-before),before,after:d.deposito,keterangan:'Edit massal via import CSV pelanggan per outlet',tanggal:Date.now(),outlet_id:outletId});
             localStorage.setItem('laundryland_deposito_history', JSON.stringify(hist));
           }catch(err){}
         }
         existing.last_modified=Date.now(); edit++;
       }else{
         if(!nohp && !importTanpaNoHP){ skip++; return; }
-        const newPel = {id:uid(),nama:d.nama,nohp:nohp,alamat:d.alamat,deposito:d.deposito,outlet_id:currentOutletId||DB.outlets[0]?.id||'outlet_1',last_modified:Date.now()};
+        const newPel = {id:uid(),nama:d.nama,nohp:nohp,alamat:d.alamat,deposito:d.deposito,outlet_id:outletId,last_modified:Date.now(),created_at:Date.now()};
         DB.pelanggans.push(newPel);
         if(d.deposito>0){
-          try{ tambahDepositoTransaksi(newPel.id, d.deposito, 'Import massal pelanggan', 'TOPUP'); }catch(err){}
+          try{ tambahDepositoTransaksi(newPel.id, d.deposito, 'Import massal pelanggan per outlet', 'TOPUP'); }catch(err){}
         }
         add++;
       }
@@ -8974,8 +9218,8 @@ function prosesImportPelanggan(){
     document.getElementById('importPelangganText').value=''; 
     const fileEl=document.getElementById('importPelangganFile'); if(fileEl) fileEl.value=''; 
     parsedPelangganImport=[];
-    const outletName = DB.outlets.find(o=>o.id===currentOutletId)?.nama || 'outlet aktif';
-    alert(`Import Pelanggan Selesai ke ${outletName}!\nTambah baru: ${add}\nEdit massal: ${edit}\nSkip: ${skip}\nTotal di ${outletName}: ${DB.pelanggans.filter(p=>(p.outlet_id||DB.outlets[0]?.id)===currentOutletId).length}`);
+    const outletName = DB.outlets.find(o=>o.id===outletId)?.nama || 'outlet aktif';
+    alert(`Import Pelanggan Independen Selesai ke ${outletName}!\nTambah baru: ${add}\nEdit (by NoHP per outlet): ${edit}\nSkip: ${skip}\nTotal di ${outletName}: ${DB.pelanggans.filter(p=> (p.outlet_id||'')===outletId).length}`);
   }catch(e){logError(e); alert('Error import: '+e.message);}
 }
 
@@ -11977,86 +12221,435 @@ function hapusAllKasAwal(){
 <div id="modalRiwayatEditNota" class="modal"><div class="modal-box" style="max-width:420px"><div style="display:flex;justify-content:space-between;align-items:center"><b>📝 Riwayat Edit Nota</b><span style="cursor:pointer;font-size:18px" onclick="closeModal('modalRiwayatEditNota')">✕</span></div><div style="margin-top:8px"><input id="searchRiwayatEditNotaModal" class="form-input" placeholder="Cari karyawan / alasan" oninput="renderRiwayatEditNota()" style="font-size:11px"><div style="margin-top:6px;font-size:10px"><span id="countRiwayatEditNotaModal">0 log</span></div><div id="riwayatEditNotaListModal" style="margin-top:8px;max-height:60vh;overflow:auto"></div></div><div style="margin-top:10px;display:flex;gap:6px"><button class="btn btn-abu" style="flex:1" onclick="closeModal('modalRiwayatEditNota')">Tutup</button><button class="btn btn-abu" style="padding:6px 10px;background:#fee2e2;border:1px solid #fecaca;color:#991b1b" onclick="resetRiwayatEditNota()">🗑️ Reset</button></div></div></div>
 <div id="modalHutangDeposit" class="modal"><div class="modal-box" style="max-width:420px"><div style="display:flex;justify-content:space-between;align-items:center"><b>💰 Hutang Deposit</b><span style="cursor:pointer;font-size:18px" onclick="closeModal('modalHutangDeposit')">✕</span></div><div style="margin-top:8px;max-height:60vh;overflow:auto"><div id="laporanHutangDetailModal"></div><div id="laporanHutangModal" style="margin-top:6px"></div></div><div style="margin-top:10px"><button class="btn btn-abu btn-full" onclick="closeModal('modalHutangDeposit')">Tutup</button></div></div></div>
 <div id="modalRiwayatDeposito" class="modal"><div class="modal-box" style="max-width:420px"><div style="display:flex;justify-content:space-between;align-items:center"><b>📜 Riwayat Deposito</b><span style="cursor:pointer;font-size:18px" onclick="closeModal('modalRiwayatDeposito')">✕</span></div><div style="margin-top:8px"><input id="searchDepositoLaporanModal" class="form-input" placeholder="Cari nama" oninput="if(typeof safeRenderDepositoHistory==='function') safeRenderDepositoHistory()" style="font-size:11px"><div id="depositoHistoryLaporanModal" style="margin-top:8px;max-height:60vh;overflow:auto"></div><b id="totalDepositoHistModal" style="font-size:11px"></b></div><div style="margin-top:10px"><button class="btn btn-abu btn-full" onclick="closeModal('modalRiwayatDeposito')">Tutup</button></div></div></div>
+<script>
+// ===== ULTIMATE STORAGE v23.0 - TANGGUH BERTAHUN-TAHUN =====
+// Layer 1: SQLite Native (utama, anti hilang, unlimited)
+// Layer 2: Preferences (backup cepat)
+// Layer 3: localStorage (fallback PWA)
+// Layer 4: Supabase (backup cloud)
+// Auto-migrasi, auto-backup harian, anti quota
 
-// ===== NATIVE APK PATCH v28.1 - SHARE TANPA TOAST + BLUETOOTH CLASSIC BRIDGE =====
-async function shareGambarNotaTanpaToast_Native(notaId){
-  try{
-    const nota = (DB.notas||[]).find(n=>n.id===notaId)||DB.notas[0]; if(!nota) return;
-    const pel = (DB.pelanggans||[]).find(p=>p.id===nota.pelanggan_id)||{nama:'Pelanggan',nohp:''};
-    const setting = DB.setting&&DB.setting.nota?DB.setting.nota:{};
-    const outletNama = (typeof getOutletAktifNama==='function'?getOutletAktifNama():'Laundry Land');
-    const canvas = document.getElementById('canvasPNG');
-    if(!canvas){ alert('Buka Preview dulu'); return; }
-    renderNotaCanvas(canvas, nota, pel, setting, outletNama);
-    try{ const src=setting.logoPNG||setting.logoThermal; if(src){ await loadLogoImage(src); await renderNotaCanvasAsync(canvas, nota, pel, setting, outletNama);} }catch(e){}
-    const blob = await new Promise(r=> canvas.toBlob(b=>r(b),'image/png',0.92));
-    const file = new File([blob], 'nota-'+nota.no_nota+'.png', {type:'image/png'});
-    // 1. Coba Capacitor native share (APK)
-    if(window.Capacitor && Capacitor.isNativePlatform && Capacitor.Plugins && Capacitor.Plugins.Share){
-      try{
-        const tmpPath = 'nota-'+nota.no_nota+'.png';
-        // save via Filesystem if available
-        if(Capacitor.Plugins.Filesystem){
-          const b64 = await new Promise(res=>{ const reader=new FileReader(); reader.onloadend=()=>res(reader.result.split(',')[1]); reader.readAsDataURL(blob); });
-          await Capacitor.Plugins.Filesystem.writeFile({path:tmpPath, data:b64, directory:'CACHE'});
-          const uriRes = await Capacitor.Plugins.Filesystem.getUri({path:tmpPath, directory:'CACHE'});
-          // share via Share plugin with file uri (Capacitor 6+ supports file)
-          await Capacitor.Plugins.Share.share({title:'Nota '+nota.no_nota, text:'Nota '+pel.nama+' - '+formatRp(nota.jumlah||0), files:[uriRes.uri]});
-          return;
-        }else{
-          await Capacitor.Plugins.Share.share({title:'Nota '+nota.no_nota, text:'Nota '+pel.nama});
-          return;
+window.UltimateStorage = (function(){
+  const DB_NAME = 'laundryland_ultimate';
+  const DB_VERSION = 23;
+  let sqliteDB = null;
+  let isNativeReady = false;
+  let migrationDone = false;
+
+  async function init(){
+    try{
+      console.log('[Ultimate] Init storage tangguh...');
+      
+      // Cek native
+      if(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()){
+        isNativeReady = true;
+        console.log('[Ultimate] Native platform detected');
+        
+        // Init SQLite jika ada
+        if(window.CapacitorSQLite){
+          try{
+            const ret = await window.CapacitorSQLite.createConnection({
+              database: DB_NAME,
+              version: DB_VERSION,
+              encrypted: false,
+              mode: 'no-encryption'
+            });
+            sqliteDB = ret;
+            await sqliteDB.open();
+            
+            // Buat tables ultimate
+            await sqliteDB.execute(`
+              CREATE TABLE IF NOT EXISTS ultimate_kv (
+                k TEXT PRIMARY KEY NOT NULL,
+                v TEXT,
+                updated_at INTEGER
+              );
+              CREATE TABLE IF NOT EXISTS notas (
+                id TEXT PRIMARY KEY NOT NULL,
+                no_nota TEXT,
+                outlet_id TEXT,
+                data TEXT,
+                last_modified INTEGER,
+                is_deleted INTEGER DEFAULT 0
+              );
+              CREATE TABLE IF NOT EXISTS pelanggans (
+                id TEXT PRIMARY KEY NOT NULL,
+                data TEXT,
+                last_modified INTEGER
+              );
+              CREATE TABLE IF NOT EXISTS checkpoints (
+                id INTEGER PRIMARY KEY,
+                label TEXT,
+                data TEXT,
+                created_at INTEGER
+              );
+            `);
+            console.log('[Ultimate] SQLite tables ready');
+          }catch(e){
+            console.warn('[Ultimate] SQLite init failed, fallback to Preferences', e);
+            sqliteDB = null;
+          }
         }
-      }catch(e){ console.warn('Native share fail, fallback web', e); }
+      }
+      
+      // Migrasi dari localStorage lama ke SQLite jika belum
+      await migrateFromLocalStorage();
+      
+      // Auto backup harian
+      setupAutoBackup();
+      
+      console.log('[Ultimate] Ready - isNative:', isNativeReady, 'sqlite:', !!sqliteDB);
+      return true;
+    }catch(e){
+      console.error('[Ultimate] Init error', e);
+      return false;
     }
-    // 2. PWA Web Share API Level 2 - tanpa toast
-    if(navigator.canShare && navigator.canShare({files:[file]})){
-      await navigator.share({files:[file], title:'Nota '+nota.no_nota, text:'Nota '+pel.nama});
-      return;
-    }
-    // 3. Fallback clipboard (old with no toast)
+  }
+
+  async function migrateFromLocalStorage(){
     try{
-      await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
-      window.open('https://wa.me/'+formatNoHPforWA(pel.nohp),'_blank');
-    }catch(err){
-      // last fallback download
-      const url=canvas.toDataURL('image/png'); const a=document.createElement('a'); a.href=url; a.download='nota-'+nota.no_nota+'.png'; a.click();
-      window.open('https://wa.me/'+formatNoHPforWA(pel.nohp),'_blank');
+      if(migrationDone) return;
+      const old = localStorage.getItem('laundryland_db_v2') || localStorage.getItem('laundryland_db') || localStorage.getItem('DB_KEY');
+      if(!old) return;
+      
+      console.log('[Ultimate] Migrating from localStorage to SQLite...');
+      const data = JSON.parse(old);
+      
+      if(sqliteDB){
+        // Simpan ke KV utama
+        await sqliteDB.run("INSERT OR REPLACE INTO ultimate_kv (k,v,updated_at) VALUES (?,?,?)", 
+          ['main_db', old, Date.now()]);
+        
+        // Simpan notas per row untuk anti ganda query cepat
+        if(data.notas && Array.isArray(data.notas)){
+          for(let n of data.notas.slice(0,5000)){ // batch 5000
+            try{
+              await sqliteDB.run("INSERT OR REPLACE INTO notas (id,no_nota,outlet_id,data,last_modified) VALUES (?,?,?,?,?)",
+                [n.id, n.no_nota||'', n.outlet_id||'', JSON.stringify(n), n.last_modified||Date.now()]);
+            }catch(e){}
+          }
+        }
+        
+        // Backup ke Preferences juga
+        if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Preferences){
+          await window.Capacitor.Plugins.Preferences.set({key: 'ultimate_main', value: old});
+        }
+      }
+      
+      migrationDone = true;
+      localStorage.setItem('laundryland_migrated_v23', Date.now().toString());
+      console.log('[Ultimate] Migration done');
+    }catch(e){
+      console.warn('[Ultimate] Migration failed', e);
     }
-  }catch(e){ alert('Gagal share: '+(e.message||e)); }
-}
-// Override tombol share lama biar tanpa toast di PWA juga
-if(typeof window.showPilihanKirim==='function'){
-  const _oldShowPilihanKirim = window.showPilihanKirim;
-  window.showPilihanKirim = function(notaId,isBisnis){
+  }
+
+  async function saveUltimate(key, value){
+    const str = typeof value === 'string' ? value : JSON.stringify(value);
+    const now = Date.now();
+    
+    // Layer 1: SQLite
+    if(sqliteDB){
+      try{
+        await sqliteDB.run("INSERT OR REPLACE INTO ultimate_kv (k,v,updated_at) VALUES (?,?,?)", [key, str, now]);
+      }catch(e){ console.warn('[Ultimate] SQLite save failed', e); }
+    }
+    
+    // Layer 2: Preferences (Capacitor)
     try{
-      // langsung panggil native tanpa modal 4 pilihan kalau di APK, di PWA tetap pakai modal tapi gambar tanpa toast
-      if(window.Capacitor && Capacitor.isNativePlatform()){
-        shareGambarNotaTanpaToast_Native(notaId);
-        return;
+      if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Preferences){
+        await window.Capacitor.Plugins.Preferences.set({key: key, value: str});
       }
     }catch(e){}
-    return _oldShowPilihanKirim.apply(this, arguments);
-  }
-}
-// Bluetooth Classic bridge untuk APK
-window.BluetoothClassic = {
-  isNative: !!(window.Capacitor && Capacitor.isNativePlatform && Capacitor.Plugins && Capacitor.Plugins.BluetoothThermal),
-  async print(notaId){
-    if(this.isNative){
+    
+    // Layer 3: localStorage (fallback)
+    try{
+      localStorage.setItem(key, str);
+      // Simpan juga versi chunked untuk anti quota (pecah 1MB per chunk)
+      if(str.length > 900000){
+        const chunks = Math.ceil(str.length / 900000);
+        for(let i=0;i<chunks;i++){
+          localStorage.setItem(key+'_chunk_'+i, str.substring(i*900000, (i+1)*900000));
+        }
+        localStorage.setItem(key+'_chunks', chunks.toString());
+      }
+    }catch(e){
+      console.warn('[Ultimate] localStorage quota, trying cleanup', e);
       try{
-        const nota = DB.notas.find(n=>n.id===notaId);
-        const pel = DB.pelanggans.find(p=>p.id===nota.pelanggan_id);
-        const setting = DB.setting.nota;
-        const text = (typeof generateThermalText==='function'?generateThermalText(nota,pel,setting,getOutletAktifNama()):nota.no_nota);
-        const res = await Capacitor.Plugins.BluetoothThermal.print({text:text, notaId:notaId});
-        return res;
-      }catch(e){ console.warn(e); return false; }
-    }else{
-      return printViaBluetooth(notaId);
+        // Hapus cache lama
+        Object.keys(localStorage).forEach(k=>{
+          if(k.includes('preview') || k.includes('cache') || k.includes('log')){
+            localStorage.removeItem(k);
+          }
+        });
+        localStorage.setItem(key, str);
+      }catch(e2){}
+    }
+    
+    // Layer 4: Supabase sudah di-handle di saveDB asli
+  }
+
+  async function loadUltimate(key){
+    // Coba SQLite dulu
+    if(sqliteDB){
+      try{
+        const res = await sqliteDB.query("SELECT v FROM ultimate_kv WHERE k = ? LIMIT 1", [key]);
+        if(res.values && res.values.length>0){
+          return res.values[0].v;
+        }
+      }catch(e){}
+    }
+    
+    // Coba Preferences
+    try{
+      if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Preferences){
+        const ret = await window.Capacitor.Plugins.Preferences.get({key: key});
+        if(ret.value) return ret.value;
+      }
+    }catch(e){}
+    
+    // Coba chunked localStorage
+    try{
+      const chunks = localStorage.getItem(key+'_chunks');
+      if(chunks){
+        let full = '';
+        for(let i=0;i<parseInt(chunks);i++){
+          full += localStorage.getItem(key+'_chunk_'+i) || '';
+        }
+        if(full) return full;
+      }
+    }catch(e){}
+    
+    // Fallback localStorage biasa
+    return localStorage.getItem(key);
+  }
+
+  function setupAutoBackup(){
+    // Backup otomatis tiap 6 jam + saat app close
+    setInterval(async ()=>{
+      try{
+        const main = localStorage.getItem('laundryland_db_v2') || localStorage.getItem('DB_KEY');
+        if(!main) return;
+        
+        // Simpan ke file jika native
+        if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem){
+          try{
+            const fileName = `backup_${new Date().toISOString().slice(0,10)}.json`;
+            await window.Capacitor.Plugins.Filesystem.writeFile({
+              path: fileName,
+              data: main,
+              directory: 'DOCUMENTS',
+              encoding: 'utf8'
+            });
+            console.log('[Ultimate] Auto backup to file:', fileName);
+          }catch(e){}
+        }
+        
+        // Checkpoint otomatis
+        if(typeof createCheckpoint==='function' && Math.random()<0.1){ // 10% chance tiap interval
+          try{ createCheckpoint('auto_'+Date.now()); }catch(e){}
+        }
+      }catch(e){}
+    }, 6*60*60*1000); // 6 jam
+    
+    // Backup saat beforeunload
+    window.addEventListener('beforeunload', ()=>{
+      try{
+        const main = localStorage.getItem('laundryland_db_v2');
+        if(main && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Preferences){
+          window.Capacitor.Plugins.Preferences.set({key: 'last_backup_'+Date.now(), value: main});
+        }
+      }catch(e){}
+    });
+  }
+
+  // Override saveDB asli untuk tangguh
+  function patchSaveDB(){
+    const originalSaveDB = window.saveDB;
+    if(!originalSaveDB) return;
+    
+    window.saveDB = function(isInstant){
+      try{
+        // Panggil asli dulu
+        const result = originalSaveDB.apply(this, arguments);
+        
+        // Tambahan ultimate save async
+        setTimeout(async ()=>{
+          try{
+            const dbStr = localStorage.getItem('laundryland_db_v2') || localStorage.getItem('DB_KEY') || JSON.stringify(window.DB||{});
+            await saveUltimate('laundryland_db_v2_ultimate', dbStr);
+            await saveUltimate('laundryland_db_v2', dbStr); // backup double
+            
+            // Simpan per nota untuk anti ganda super cepat
+            if(window.DB && window.DB.notas && sqliteDB){
+              const lastNota = window.DB.notas[0];
+              if(lastNota){
+                try{
+                  await sqliteDB.run("INSERT OR REPLACE INTO notas (id,no_nota,outlet_id,data,last_modified) VALUES (?,?,?,?,?)",
+                    [lastNota.id, lastNota.no_nota, lastNota.outlet_id, JSON.stringify(lastNota), Date.now()]);
+                }catch(e){}
+              }
+            }
+          }catch(e){ console.warn('[Ultimate] patch save failed', e); }
+        }, 100);
+        
+        return result;
+      }catch(e){
+        console.error('[Ultimate] saveDB patch error', e);
+        return originalSaveDB.apply(this, arguments);
+      }
+    };
+    
+    // Patch saveDBLocal juga
+    if(window.saveDBLocal){
+      const origLocal = window.saveDBLocal;
+      window.saveDBLocal = function(){
+        try{
+          const res = origLocal.apply(this, arguments);
+          // Ultimate backup
+          const dbStr = localStorage.getItem('laundryland_db_v2') || JSON.stringify(window.DB||{});
+          saveUltimate('laundryland_db_v2_ultimate', dbStr);
+          return res;
+        }catch(e){ return origLocal.apply(this, arguments); }
+      };
     }
   }
-};
 
+  return {
+    init,
+    save: saveUltimate,
+    load: loadUltimate,
+    patchSaveDB,
+    getStatus: ()=>({isNativeReady, hasSQLite: !!sqliteDB, migrationDone})
+  };
+})();
+
+// Auto init setelah DB ready
+(function(){
+  function tryInit(){
+    if(typeof DB!=='undefined' && DB){
+      window.UltimateStorage.init().then(()=>{
+        window.UltimateStorage.patchSaveDB();
+        console.log('[Ultimate] Patched saveDB - tangguh aktif', window.UltimateStorage.getStatus());
+      });
+    }else{
+      setTimeout(tryInit, 500);
+    }
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', tryInit);
+  }else{
+    setTimeout(tryInit, 1000);
+  }
+})();
+</script>
+<script>
+// ===== ULTIMATE PRINT & WA v23.0 - TANGGUH + RETRY + ANTI GAGAL =====
+window.UltimatePrint = (function(){
+  const MAX_RETRY = 3;
+  const TIMEOUT = 15000;
+
+  async function robustPrintThermal(notaId){
+    let lastError = null;
+    for(let attempt=1; attempt<=MAX_RETRY; attempt++){
+      try{
+        console.log(`[UltimatePrint] Attempt ${attempt}/${MAX_RETRY}`);
+        const statusEl = document.getElementById('bluetoothStatus');
+        if(statusEl){
+          statusEl.style.display='block';
+          statusEl.textContent = `🖨️ Mencetak... percobaan ${attempt}/${MAX_RETRY}`;
+          statusEl.style.background='#fef3c7';
+        }
+
+        // Timeout wrapper
+        const result = await Promise.race([
+          cetakNotaThermalNativeInternal(notaId),
+          new Promise((_,reject)=>setTimeout(()=>reject(new Error('Timeout 15s')), TIMEOUT))
+        ]);
+
+        if(statusEl){
+          statusEl.textContent='✅ Nota tercetak tangguh';
+          statusEl.style.background='#bbf7d0';
+        }
+        return result;
+      }catch(e){
+        lastError = e;
+        console.warn(`[UltimatePrint] Attempt ${attempt} failed`, e);
+        if(attempt < MAX_RETRY){
+          await new Promise(r=>setTimeout(r, 1000*attempt)); // backoff
+        }
+      }
+    }
+    throw lastError;
+  }
+
+  async function cetakNotaThermalNativeInternal(notaId){
+    // Panggil fungsi yang sudah ada
+    return window.cetakNotaThermalNative ? window.cetakNotaThermalNative(notaId) : null;
+  }
+
+  async function robustShareWA(notaId){
+    let lastError = null;
+    for(let attempt=1; attempt<=MAX_RETRY; attempt++){
+      try{
+        const statusEl = document.getElementById('bluetoothStatus');
+        if(statusEl){
+          statusEl.style.display='block';
+          statusEl.textContent = `📲 Menyiapkan WA... ${attempt}/${MAX_RETRY}`;
+          statusEl.style.background='#dcfce7';
+        }
+
+        const result = await Promise.race([
+          window.kirimNotaWABisnisNative ? window.kirimNotaWABisnisNative(notaId) : null,
+          new Promise((_,reject)=>setTimeout(()=>reject(new Error('Timeout WA 15s')), TIMEOUT))
+        ]);
+
+        return result;
+      }catch(e){
+        lastError = e;
+        if(attempt < MAX_RETRY) await new Promise(r=>setTimeout(r, 1000));
+      }
+    }
+    throw lastError;
+  }
+
+  return { print: robustPrintThermal, shareWA: robustShareWA };
+})();
+
+// Override tombol untuk pakai robust version
+setTimeout(()=>{
+  const btnPrint = document.getElementById('btnCetakThermal58');
+  const btnWA = document.getElementById('btnKirimWABisnis');
+  if(btnPrint){
+    const old = btnPrint.onclick;
+    btnPrint.onclick = async function(){
+      try{
+        btnPrint.disabled=true;
+        btnPrint.innerHTML='⏳ Mencetak Tangguh...';
+        await window.UltimatePrint.print(window.currentPreviewNotaId);
+      }catch(e){
+        alert('❌ Gagal cetak setelah 3x coba: '+(e.message||e)+'\n\nCek: 1. Printer nyala? 2. Bluetooth paired? 3. Kertas ada?');
+      }finally{
+        btnPrint.disabled=false;
+        btnPrint.innerHTML='🖨️ Cetak Thermal 58mm';
+      }
+    };
+  }
+  if(btnWA){
+    btnWA.onclick = async function(){
+      try{
+        btnWA.disabled=true;
+        btnWA.innerHTML='⏳ Mengirim Tangguh...';
+        await window.UltimatePrint.shareWA(window.currentPreviewNotaId);
+      }catch(e){
+        alert('❌ Gagal WA setelah 3x coba: '+(e.message||e));
+      }finally{
+        btnWA.disabled=false;
+        btnWA.innerHTML='📲 Kirim WA Bisnis';
+      }
+    };
+  }
+}, 2000);
+</script>
 </body>
 </html>
