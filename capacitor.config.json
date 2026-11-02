@@ -1,14 +1,15 @@
 {
-  "appId": "com.laundryland.app",
-  "appName": "LaundryLand",
+  "appId": "com.laundryland.ultimate",
+  "appName": "LaundryLand Ultimate",
   "webDir": "www",
-  "bundledWebRuntime": false,
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  },
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "url": "https://laundryland.github.io/laundry/",
+    "cleartext": true
+  },
+  "plugins": {
+    "CapacitorSQLite": {
+      "androidIsEncryption": false
+    }
   }
 }

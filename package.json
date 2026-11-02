@@ -1,12 +1,15 @@
 {
-  "name": "laundryland-apk",
-  "version": "28.1.0",
-  "private": true,
+  "name": "laundryland-ultimate",
+  "version": "23.0.0",
+  "description": "LaundryLand Ultimate Tangguh - Operasional Bertahun-tahun",
   "dependencies": {
-    "@capacitor/android": "^6.1.2",
-    "@capacitor/core": "^6.1.2",
-    "@capacitor/filesystem": "^6.0.1",
-    "@capacitor/share": "^6.0.1",
-    "@capacitor-community/bluetooth-le": "^6.0.1"
+    "@capacitor/core": "^5.7.0",
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/preferences": "^5.0.7",
+    "@capacitor/filesystem": "^5.2.1",
+    "@capacitor-community/sqlite": "^5.6.2"
+  },
+  "scripts": {
+    "build": "npx cap sync android"
   }
 }
