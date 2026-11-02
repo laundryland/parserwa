@@ -5,6 +5,7 @@
   "dependencies": {
     "@capacitor/core": "^5.7.0",
     "@capacitor/android": "^5.7.0",
+    "@capacitor/cli": "^5.7.0",
     "@capacitor/preferences": "^5.0.7",
     "@capacitor/filesystem": "^5.2.1",
     "@capacitor-community/sqlite": "^5.6.2"
@@ -12,7 +13,5 @@
   "scripts": {
     "build": "npx cap sync android"
   },
-  "engines": {
-    "node": ">=22.0.0"
-  }
+  "devDependencies": {}
 }

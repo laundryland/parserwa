@@ -3,9 +3,7 @@
   "appName": "LaundryLand Ultimate",
   "webDir": "www",
   "server": {
-    "androidScheme": "https",
-    "url": "https://laundryland.github.io/laundry/",
-    "cleartext": true
+    "androidScheme": "https"
   },
   "plugins": {
     "CapacitorSQLite": {
