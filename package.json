@@ -11,5 +11,8 @@
   },
   "scripts": {
     "build": "npx cap sync android"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
