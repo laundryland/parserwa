@@ -1,7 +1,10 @@
 {
   "name": "laundryland-ultimate",
   "version": "23.0.0",
-  "description": "LaundryLand Ultimate Tangguh - Operasional Bertahun-tahun",
+  "description": "LaundryLand Ultimate Tangguh",
+  "scripts": {
+    "build": "cap sync android"
+  },
   "dependencies": {
     "@capacitor/core": "^5.7.0",
     "@capacitor/android": "^5.7.0",
@@ -9,7 +12,7 @@
     "@capacitor/filesystem": "^5.2.1",
     "@capacitor-community/sqlite": "^5.6.2"
   },
-  "scripts": {
-    "build": "npx cap sync android"
+  "devDependencies": {
+    "@capacitor/cli": "^5.7.0"
   }
 }
