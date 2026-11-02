@@ -1,0 +1,14 @@
+{
+  "appId": "com.laundryland.app",
+  "appName": "LaundryLand",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
